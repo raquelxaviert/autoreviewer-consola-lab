@@ -2,3 +2,9 @@ node_modules
 *.log*
 dist
 coverage
+
+# AutoReviewer lab
+experiments/work
+static-raw.json
+review-result.json
+.secrets.env

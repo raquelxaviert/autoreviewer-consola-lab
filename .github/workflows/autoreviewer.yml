@@ -1,0 +1,90 @@
+name: AutoReviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [experiment-base]
+
+# Nothing is granted by default; each job asks only for what it needs.
+permissions: {}
+
+concurrency:
+  group: autoreviewer-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  # Job 1 — runs code from the PR (untrusted). No secrets, read-only token.
+  static-analysis:
+    # Only PRs whose head branch lives in this repository (no forks).
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Consola dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build collector
+        run: |
+          pnpm install --frozen-lockfile --dir tools/autoreviewer
+          pnpm --dir tools/autoreviewer build
+      - name: ESLint + tsc on PR head and merge base
+        run: >
+          node tools/autoreviewer/dist/src/index.js collect
+          --cwd . --base "${{ github.event.pull_request.base.sha }}" --out static-raw.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-raw
+          path: static-raw.json
+          retention-days: 7
+
+  # Job 2 — trusted code only: the AutoReviewer from the base branch. Receives secrets.
+  review:
+    needs: static-analysis
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout trusted base branch (never the PR code)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build AutoReviewer
+        run: |
+          pnpm install --frozen-lockfile --dir tools/autoreviewer
+          pnpm --dir tools/autoreviewer build
+      - uses: actions/download-artifact@v4
+        with:
+          name: static-raw
+          path: artifact
+      - name: Review and publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-2.5-flash' }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          AUTOREVIEWER_MODE: ${{ vars.AUTOREVIEWER_MODE || 'hybrid' }}
+          DRY_RUN: "false"
+        # The artifact is validated by the tool (it was produced by untrusted code).
+        run: node tools/autoreviewer/dist/src/index.js review --static artifact/static-raw.json --out review-result.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: review-result
+          path: review-result.json
+          if-no-files-found: ignore
+          retention-days: 30

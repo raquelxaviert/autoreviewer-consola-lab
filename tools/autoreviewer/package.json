@@ -1,0 +1,24 @@
+{
+  "name": "autoreviewer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Automated PR review with ESLint, TypeScript Compiler and Gemini (MES/UFMG coursework)",
+  "type": "module",
+  "license": "MIT",
+  "bin": { "autoreviewer": "dist/src/index.js" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "tsc -p tsconfig.json && node --test \"dist/tests/*.test.js\"",
+    "collect": "node dist/src/index.js collect",
+    "review": "node dist/src/index.js review",
+    "evaluate": "node dist/src/index.js evaluate"
+  },
+  "dependencies": {
+    "@octokit/rest": "^22.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "typescript": "5.9.3"
+  },
+  "engines": { "node": ">=22" }
+}
