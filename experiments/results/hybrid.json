@@ -1,0 +1,266 @@
+{
+  "mode": "hybrid",
+  "aggregate": {
+    "scenariosEvaluated": 0,
+    "scenariosPending": 15,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "duplicates": 0,
+    "precision": null,
+    "recall": null,
+    "totalMs": 0,
+    "meanMs": null
+  },
+  "scenarios": [
+    {
+      "scenario": "pr01",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr01-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr02",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr02-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr03",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr03-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr04",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr04-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr05",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr05-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr06",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr06-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr07",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr07-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr08",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr08-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr09",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr09-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr10",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr10-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr11",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr11-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr12",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr12-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr13",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [],
+      "findings": []
+    },
+    {
+      "scenario": "pr14",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [],
+      "findings": []
+    },
+    {
+      "scenario": "pr15",
+      "mode": "hybrid",
+      "status": "pending",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": null,
+      "matchedIssues": [],
+      "missedIssues": [],
+      "findings": []
+    }
+  ]
+}

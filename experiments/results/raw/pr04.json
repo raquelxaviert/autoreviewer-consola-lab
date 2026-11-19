@@ -1,0 +1,44 @@
+{
+  "scenario": "pr04",
+  "headSha": "501e8698ffc41689eea729df2c52e8035fafbcd4",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "static",
+  "files": [
+    "src/consola.ts"
+  ],
+  "diffChars": 414,
+  "diffTruncated": false,
+  "staticMs": 23129,
+  "llmMs": 0,
+  "llmAttempts": 0,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [
+    {
+      "source": "eslint",
+      "file": "src/consola.ts",
+      "line": 452,
+      "column": 28,
+      "rule": "unicorn/no-array-for-each",
+      "category": "lint_violation",
+      "severity": "medium",
+      "message": "Use `for…of` instead of `.forEach(…)`.",
+      "inDiff": true
+    }
+  ],
+  "llm": [],
+  "hybrid": [
+    {
+      "source": "eslint",
+      "file": "src/consola.ts",
+      "line": 452,
+      "column": 28,
+      "rule": "unicorn/no-array-for-each",
+      "category": "lint_violation",
+      "severity": "medium",
+      "message": "Use `for…of` instead of `.forEach(…)`.",
+      "inDiff": true
+    }
+  ]
+}

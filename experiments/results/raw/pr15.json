@@ -1,0 +1,20 @@
+{
+  "scenario": "pr15",
+  "headSha": "45fe31ab19b22ad1e86ad64bb986a44154d8ef29",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "static",
+  "files": [
+    "src/utils/string.ts"
+  ],
+  "diffChars": 462,
+  "diffTruncated": false,
+  "staticMs": 24324,
+  "llmMs": 0,
+  "llmAttempts": 0,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [],
+  "hybrid": []
+}

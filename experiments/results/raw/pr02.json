@@ -1,0 +1,44 @@
+{
+  "scenario": "pr02",
+  "headSha": "8ec739a9aa1c9c1984ee9ecabfbc13d2f86ecd64",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "static",
+  "files": [
+    "src/utils/tree.ts"
+  ],
+  "diffChars": 489,
+  "diffTruncated": false,
+  "staticMs": 22838,
+  "llmMs": 0,
+  "llmAttempts": 0,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [
+    {
+      "source": "typescript",
+      "file": "src/utils/tree.ts",
+      "line": 72,
+      "column": 3,
+      "rule": "TS2322",
+      "category": "type_error",
+      "severity": "high",
+      "message": "Type 'string[]' is not assignable to type 'string'.",
+      "inDiff": false
+    }
+  ],
+  "llm": [],
+  "hybrid": [
+    {
+      "source": "typescript",
+      "file": "src/utils/tree.ts",
+      "line": 72,
+      "column": 3,
+      "rule": "TS2322",
+      "category": "type_error",
+      "severity": "high",
+      "message": "Type 'string[]' is not assignable to type 'string'.",
+      "inDiff": false
+    }
+  ]
+}

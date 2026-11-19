@@ -1,0 +1,44 @@
+{
+  "scenario": "pr01",
+  "headSha": "575f679eecd2c8b9d54074ff267fe012c5e80994",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "static",
+  "files": [
+    "src/reporters/fancy.ts"
+  ],
+  "diffChars": 420,
+  "diffTruncated": false,
+  "staticMs": 25269,
+  "llmMs": 0,
+  "llmAttempts": 0,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [
+    {
+      "source": "typescript",
+      "file": "src/reporters/fancy.ts",
+      "line": 105,
+      "column": 34,
+      "rule": "TS2345",
+      "category": "type_error",
+      "severity": "high",
+      "message": "Argument of type 'number' is not assignable to parameter of type 'Date'.",
+      "inDiff": true
+    }
+  ],
+  "llm": [],
+  "hybrid": [
+    {
+      "source": "typescript",
+      "file": "src/reporters/fancy.ts",
+      "line": 105,
+      "column": 34,
+      "rule": "TS2345",
+      "category": "type_error",
+      "severity": "high",
+      "message": "Argument of type 'number' is not assignable to parameter of type 'Date'.",
+      "inDiff": true
+    }
+  ]
+}

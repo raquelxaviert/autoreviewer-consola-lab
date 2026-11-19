@@ -1,0 +1,20 @@
+{
+  "scenario": "pr13",
+  "headSha": "0372541751eae5e10dbb816a8b74447bfda54572",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "static",
+  "files": [
+    "src/reporters/fancy.ts"
+  ],
+  "diffChars": 932,
+  "diffTruncated": false,
+  "staticMs": 25752,
+  "llmMs": 0,
+  "llmAttempts": 0,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [],
+  "hybrid": []
+}

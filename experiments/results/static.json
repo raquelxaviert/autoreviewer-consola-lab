@@ -1,0 +1,322 @@
+{
+  "mode": "static",
+  "aggregate": {
+    "scenariosEvaluated": 15,
+    "scenariosPending": 0,
+    "tp": 4,
+    "fp": 0,
+    "fn": 8,
+    "duplicates": 0,
+    "precision": 1,
+    "recall": 0.3333333333333333,
+    "totalMs": 353319,
+    "meanMs": 23555
+  },
+  "scenarios": [
+    {
+      "scenario": "pr01",
+      "mode": "static",
+      "status": "ok",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 25269,
+      "matchedIssues": [
+        "pr01-1"
+      ],
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "typescript",
+          "file": "src/reporters/fancy.ts",
+          "line": 105,
+          "column": 34,
+          "rule": "TS2345",
+          "category": "type_error",
+          "severity": "high",
+          "message": "Argument of type 'number' is not assignable to parameter of type 'Date'.",
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr01-1"
+        }
+      ]
+    },
+    {
+      "scenario": "pr02",
+      "mode": "static",
+      "status": "ok",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 22838,
+      "matchedIssues": [
+        "pr02-1"
+      ],
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "typescript",
+          "file": "src/utils/tree.ts",
+          "line": 72,
+          "column": 3,
+          "rule": "TS2322",
+          "category": "type_error",
+          "severity": "high",
+          "message": "Type 'string[]' is not assignable to type 'string'.",
+          "inDiff": false,
+          "verdict": "tp",
+          "issueId": "pr02-1"
+        }
+      ]
+    },
+    {
+      "scenario": "pr03",
+      "mode": "static",
+      "status": "ok",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 23434,
+      "matchedIssues": [
+        "pr03-1"
+      ],
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "eslint",
+          "file": "src/utils/format.ts",
+          "line": 46,
+          "column": 7,
+          "rule": "prefer-const",
+          "category": "lint_violation",
+          "severity": "medium",
+          "message": "'compiled' is never reassigned. Use 'const' instead.",
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr03-1"
+        }
+      ]
+    },
+    {
+      "scenario": "pr04",
+      "mode": "static",
+      "status": "ok",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 23129,
+      "matchedIssues": [
+        "pr04-1"
+      ],
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "eslint",
+          "file": "src/consola.ts",
+          "line": 452,
+          "column": 28,
+          "rule": "unicorn/no-array-for-each",
+          "category": "lint_violation",
+          "severity": "medium",
+          "message": "Use `for…of` instead of `.forEach(…)`.",
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr04-1"
+        }
+      ]
+    },
+    {
+      "scenario": "pr05",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "duplicates": 0,
+      "precision": null,
+      "recall": 0,
+      "timeMs": 22439,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr05-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr06",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "duplicates": 0,
+      "precision": null,
+      "recall": 0,
+      "timeMs": 23296,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr06-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr07",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "duplicates": 0,
+      "precision": null,
+      "recall": 0,
+      "timeMs": 22047,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr07-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr08",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "duplicates": 0,
+      "precision": null,
+      "recall": 0,
+      "timeMs": 22193,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr08-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr09",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "duplicates": 0,
+      "precision": null,
+      "recall": 0,
+      "timeMs": 23229,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr09-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr10",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "duplicates": 0,
+      "precision": null,
+      "recall": 0,
+      "timeMs": 22830,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr10-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr11",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "duplicates": 0,
+      "precision": null,
+      "recall": 0,
+      "timeMs": 24113,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr11-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr12",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "duplicates": 0,
+      "precision": null,
+      "recall": 0,
+      "timeMs": 22691,
+      "matchedIssues": [],
+      "missedIssues": [
+        "pr12-1"
+      ],
+      "findings": []
+    },
+    {
+      "scenario": "pr13",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": 25752,
+      "matchedIssues": [],
+      "missedIssues": [],
+      "findings": []
+    },
+    {
+      "scenario": "pr14",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": 25735,
+      "matchedIssues": [],
+      "missedIssues": [],
+      "findings": []
+    },
+    {
+      "scenario": "pr15",
+      "mode": "static",
+      "status": "ok",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "duplicates": 0,
+      "precision": null,
+      "recall": null,
+      "timeMs": 24324,
+      "matchedIssues": [],
+      "missedIssues": [],
+      "findings": []
+    }
+  ]
+}

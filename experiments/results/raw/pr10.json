@@ -1,0 +1,20 @@
+{
+  "scenario": "pr10",
+  "headSha": "1976c401771014c552dd4381522757095853118a",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "static",
+  "files": [
+    "src/utils/log.ts"
+  ],
+  "diffChars": 792,
+  "diffTruncated": false,
+  "staticMs": 22830,
+  "llmMs": 0,
+  "llmAttempts": 0,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [],
+  "hybrid": []
+}

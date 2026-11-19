@@ -1,0 +1,20 @@
+{
+  "scenario": "pr12",
+  "headSha": "bc6ffdf7158cee801ca5f71847b090f6c0080617",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "static",
+  "files": [
+    "src/consola.ts"
+  ],
+  "diffChars": 521,
+  "diffTruncated": false,
+  "staticMs": 22691,
+  "llmMs": 0,
+  "llmAttempts": 0,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [],
+  "hybrid": []
+}
