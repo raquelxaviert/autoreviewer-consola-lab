@@ -64,9 +64,9 @@ export function formatTree(items: TreeItem[], options?: TreeOptions): string {
     ...options,
   };
 
-  const tree = _buildTree(items, options).join("");
+  const tree = _buildTree(items, options);
   if (options && options.color) {
-    return colorize(options.color, tree);
+    return colorize(options.color, tree.join(""));
   }
 
   return tree;
