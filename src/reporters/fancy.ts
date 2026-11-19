@@ -102,7 +102,7 @@ export class FancyReporter extends BasicReporter {
       );
     }
 
-    const date = this.formatDate(logObj.date, opts);
+    const date = this.formatDate(Date.now(), opts);
     const coloredDate = date && colors.gray(date);
 
     const isBadge = (logObj.badge as boolean) ?? logObj.level < 2;
