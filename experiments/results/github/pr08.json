@@ -1,0 +1,37 @@
+{
+  "scenario": "pr08",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 9,
+  "headSha": "8c02715c137e26a5af43ef4da18a5c82428c458c",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/consola.ts"
+  ],
+  "diffChars": 872,
+  "diffTruncated": false,
+  "staticMs": 18466,
+  "llmMs": 31212,
+  "llmAttempts": 2,
+  "llmErrors": [
+    "attempt 1: Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/g",
+    "attempt 2: Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/g"
+  ],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [],
+  "hybrid": [],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 0,
+    "outputTokens": 0,
+    "totalTokens": 0
+  },
+  "published": {
+    "inline": 0,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/9#issuecomment-6998026132"
+  }
+}

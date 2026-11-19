@@ -1,0 +1,60 @@
+{
+  "scenario": "pr05",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 6,
+  "headSha": "4cbe01305ad42b2cf14fb73afd4082c9d367c6cc",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/reporters/fancy.ts"
+  ],
+  "diffChars": 968,
+  "diffTruncated": false,
+  "staticMs": 18923,
+  "llmMs": 7412,
+  "llmAttempts": 1,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 147,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The `formatBoxTitle` function duplicates the exact same string formatting logic (highlighting backticks and underlining underscores) as the existing `characterFormat` function. This creates redundant code, making maintenance harder as any change to this formatting logic would need to be applied in two places.",
+      "suggestion": "Remove the `formatBoxTitle` function and reuse the `characterFormat` function for formatting the box title. The original code already used `characterFormat` for this purpose.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 147,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The `formatBoxTitle` function duplicates the exact same string formatting logic (highlighting backticks and underlining underscores) as the existing `characterFormat` function. This creates redundant code, making maintenance harder as any change to this formatting logic would need to be applied in two places.",
+      "suggestion": "Remove the `formatBoxTitle` function and reuse the `characterFormat` function for formatting the box title. The original code already used `characterFormat` for this purpose.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1935,
+    "outputTokens": 169,
+    "totalTokens": 3245
+  },
+  "published": {
+    "inline": 1,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/6#issuecomment-6997989405"
+  }
+}

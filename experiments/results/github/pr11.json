@@ -1,0 +1,62 @@
+{
+  "scenario": "pr11",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 12,
+  "headSha": "c38b884bd05d04e5e09a68d0984c99b1c6aedab7",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/consola.ts"
+  ],
+  "diffChars": 895,
+  "diffTruncated": false,
+  "staticMs": 18445,
+  "llmMs": 39477,
+  "llmAttempts": 2,
+  "llmErrors": [
+    "attempt 1: Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/g"
+  ],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 428,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The `JSON.stringify` operation is performed twice with identical arguments (`[logObj.type, logObj.tag, logObj.args]`) within a few lines. This leads to redundant computation and makes the code less efficient and harder to maintain, as any change to the serialization logic would need to be applied in two places.",
+      "suggestion": "Calculate the serialized string once and store it in a temporary variable. Use this variable for both the comparison on line 427 and the assignment to `this._lastLog.serialized` on line 428.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 428,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The `JSON.stringify` operation is performed twice with identical arguments (`[logObj.type, logObj.tag, logObj.args]`) within a few lines. This leads to redundant computation and makes the code less efficient and harder to maintain, as any change to the serialization logic would need to be applied in two places.",
+      "suggestion": "Calculate the serialized string once and store it in a temporary variable. Use this variable for both the comparison on line 427 and the assignment to `this._lastLog.serialized` on line 428.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1401,
+    "outputTokens": 189,
+    "totalTokens": 3086
+  },
+  "published": {
+    "inline": 1,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/12#issuecomment-6998050372"
+  }
+}

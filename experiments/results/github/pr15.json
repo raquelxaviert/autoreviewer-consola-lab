@@ -1,0 +1,60 @@
+{
+  "scenario": "pr15",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 15,
+  "headSha": "45fe31ab19b22ad1e86ad64bb986a44154d8ef29",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/utils/string.ts"
+  ],
+  "diffChars": 462,
+  "diffTruncated": false,
+  "staticMs": 19230,
+  "llmMs": 12478,
+  "llmAttempts": 1,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/utils/string.ts",
+      "line": 72,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "low",
+      "message": "The guard clause `if (str.length >= len) { return str; }` is duplicated from the `rightAlign` function. While this logic is correct and necessary for `leftAlign` to match its documentation, repeating identical code blocks can lead to inconsistencies if the behavior for oversized strings ever needs to change, requiring updates in multiple places.",
+      "suggestion": "For such a small and stable check, the impact is minimal. However, if similar logic appears in more alignment functions (e.g., `centerAlign`), consider extracting a common helper function or applying this check at a higher level (e.g., in the `align` wrapper function if it were to delegate to internal, non-guard-checked versions).",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/utils/string.ts",
+      "line": 72,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "low",
+      "message": "The guard clause `if (str.length >= len) { return str; }` is duplicated from the `rightAlign` function. While this logic is correct and necessary for `leftAlign` to match its documentation, repeating identical code blocks can lead to inconsistencies if the behavior for oversized strings ever needs to change, requiring updates in multiple places.",
+      "suggestion": "For such a small and stable check, the impact is minimal. However, if similar logic appears in more alignment functions (e.g., `centerAlign`), consider extracting a common helper function or applying this check at a higher level (e.g., in the `align` wrapper function if it were to delegate to internal, non-guard-checked versions).",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1316,
+    "outputTokens": 220,
+    "totalTokens": 3918
+  },
+  "published": {
+    "inline": 1,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/15#issuecomment-6998072714"
+  }
+}

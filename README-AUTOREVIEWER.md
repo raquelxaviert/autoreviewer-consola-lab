@@ -126,7 +126,26 @@ pnpm --dir tools/autoreviewer evaluate          # → static.json, hybrid.json, 
 
 Detalhes da metodologia em [`docs/EXPERIMENT.md`](docs/EXPERIMENT.md).
 
+## Estado da validação (2026-11-18)
+
+| Item | Estado |
+|---|---|
+| Build e 17 testes unitários (diff multi-hunk, ESLint, tsc, validação LLM com API mockada, dedup, métricas, sugestões) | ✅ executados e passando |
+| Experimento completo, 15 cenários × 2 modalidades, `gemini-2.5-flash` | ✅ executado localmente (diff via git): `experiments/results/summary.md` |
+| Octokit: leitura de PR/arquivos/patches e publicação real (review inline + resumo atualizável) | ✅ executado nos 15 PRs reais (#1–#15), via CLI local com o mesmo núcleo; resultados em `experiments/results/github/` |
+| Bloco `suggestion` do GitHub | ✅ publicado e renderizado (PR #2) |
+| Reexecução sem duplicar comentários | ✅ verificado no PR #5 (`skippedExisting: 1`, resumo editado e não recriado) |
+| Workflow GitHub Actions | ⚠️ configurado e registrado, mas **nenhum job chegou a iniciar**: o GitHub recusou com *"account is locked due to a billing issue"* (bloqueio na conta, não no workflow) |
+| LLM na publicação dos PRs #8, #9, #11, #13, #14 e na reexecução do #1 | ⚠️ cota diária gratuita do Gemini esgotada (20 req/dia/modelo); o resumo desses PRs registra o erro, sem resultados inventados |
+
+Para concluir a validação no Actions: regularizar o billing da conta GitHub e então fechar/reabrir (ou dar push em) qualquer PR.
+O workflow `autofix.ci` herdado do upstream foi desabilitado no repositório experimental (ele roda em qualquer PR).
+
 ## Limitações conhecidas
+
+- Plano gratuito do Gemini: 20 requisições/dia para `gemini-2.5-flash`. O experimento usa 15. Uma retentativa espera 30 s em 429/5xx.
+- Sugestões `suggestion` só são publicadas quando a substituição tem uma linha, mantém o balanceamento de `{}()[]` da linha
+  original e restaura a indentação (o modelo costuma omiti-la). Isso foi corrigido após observar dois casos reais nos PRs #2 e #7.
 
 - Falhas preexistentes no Consola original: `tsc --noEmit` reporta 2 erros (`printj` sem declaração de tipos em
   `src/utils/format.ts` e um erro de tipos do `vite` em `node_modules`). Eles são descontados pela atribuição head − base.

@@ -1,0 +1,58 @@
+{
+  "scenario": "pr03",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 4,
+  "headSha": "7602cc6f20f87ef297e8f60c5317a3d2483ec913",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/utils/format.ts"
+  ],
+  "diffChars": 394,
+  "diffTruncated": false,
+  "staticMs": 19014,
+  "llmMs": 6579,
+  "llmAttempts": 1,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [
+    {
+      "source": "eslint",
+      "file": "src/utils/format.ts",
+      "line": 46,
+      "column": 7,
+      "rule": "prefer-const",
+      "category": "lint_violation",
+      "severity": "medium",
+      "message": "'compiled' is never reassigned. Use 'const' instead.",
+      "inDiff": true
+    }
+  ],
+  "llm": [],
+  "hybrid": [
+    {
+      "source": "eslint",
+      "file": "src/utils/format.ts",
+      "line": 46,
+      "column": 7,
+      "rule": "prefer-const",
+      "category": "lint_violation",
+      "severity": "medium",
+      "message": "'compiled' is never reassigned. Use 'const' instead.",
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 963,
+    "outputTokens": 9,
+    "totalTokens": 2003
+  },
+  "published": {
+    "inline": 1,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/4#issuecomment-6997983769"
+  }
+}

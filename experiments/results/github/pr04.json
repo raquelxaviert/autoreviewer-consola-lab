@@ -1,0 +1,58 @@
+{
+  "scenario": "pr04",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 5,
+  "headSha": "501e8698ffc41689eea729df2c52e8035fafbcd4",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/consola.ts"
+  ],
+  "diffChars": 414,
+  "diffTruncated": false,
+  "staticMs": 19211,
+  "llmMs": 6065,
+  "llmAttempts": 1,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [
+    {
+      "source": "eslint",
+      "file": "src/consola.ts",
+      "line": 452,
+      "column": 28,
+      "rule": "unicorn/no-array-for-each",
+      "category": "lint_violation",
+      "severity": "medium",
+      "message": "Use `for…of` instead of `.forEach(…)`.",
+      "inDiff": true
+    }
+  ],
+  "llm": [],
+  "hybrid": [
+    {
+      "source": "eslint",
+      "file": "src/consola.ts",
+      "line": 452,
+      "column": 28,
+      "rule": "unicorn/no-array-for-each",
+      "category": "lint_violation",
+      "severity": "medium",
+      "message": "Use `for…of` instead of `.forEach(…)`.",
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1205,
+    "outputTokens": 9,
+    "totalTokens": 1946
+  },
+  "published": {
+    "inline": 1,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/5#issuecomment-6997986356"
+  }
+}

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { annotatePatch, buildDiffContext, isRelevantFile, parsePatch } from "../src/diff.js";
 import { judge, ratio, scenarioMetrics, aggregate, type Scenario } from "../src/evaluate.js";
-import { reviewWithLlm, validateLlmResponse } from "../src/llm.js";
+import { reviewWithLlm, safeReplacement, validateLlmResponse } from "../src/llm.js";
 import { dedupe, formatInlineComment, selectInline } from "../src/reviewer.js";
 import { attributeFindings, parseEslint, parseTsc, validateRawStatic } from "../src/static-analysis.js";
 import type { Finding } from "../src/types.js";
@@ -135,6 +135,14 @@ describe("LLM response validation", () => {
     assert.equal(r.issues[2].replacement, null); // multi-line replacement dropped
     assert.ok(r.rejected.some((x) => /not changed/.test(x.reason)));
     assert.ok(r.rejected.some((x) => /not an added line/.test(x.reason)));
+  });
+
+  it("only keeps safe single-line suggestions and restores indentation", () => {
+    const orig = "    const date = this.formatDate(Date.now(), opts);";
+    assert.equal(safeReplacement("const date = this.formatDate(logObj.date, opts);", orig), "    const date = this.formatDate(logObj.date, opts);");
+    assert.equal(safeReplacement("            return true;", "          if (a || b) {"), null); // would unbalance braces
+    assert.equal(safeReplacement(orig.trim(), orig), null); // no actual change
+    assert.equal(safeReplacement("a\nb", orig), null);
   });
 
   it("limits the number of issues", () => {

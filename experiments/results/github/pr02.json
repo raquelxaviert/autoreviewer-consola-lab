@@ -1,0 +1,83 @@
+{
+  "scenario": "pr02",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 3,
+  "headSha": "8ec739a9aa1c9c1984ee9ecabfbc13d2f86ecd64",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/utils/tree.ts"
+  ],
+  "diffChars": 489,
+  "diffTruncated": false,
+  "staticMs": 19422,
+  "llmMs": 16662,
+  "llmAttempts": 1,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [
+    {
+      "source": "typescript",
+      "file": "src/utils/tree.ts",
+      "line": 72,
+      "column": 3,
+      "rule": "TS2322",
+      "category": "type_error",
+      "severity": "high",
+      "message": "Type 'string[]' is not assignable to type 'string'.",
+      "inDiff": false
+    }
+  ],
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/utils/tree.ts",
+      "line": 67,
+      "rule": "refactoring",
+      "category": "refactoring",
+      "severity": "high",
+      "message": "The change on this line alters the type of the `tree` variable from `string` to `string[]`. While this allows for conditional joining, it introduces an inconsistency because the `formatTree` function is declared to return a `string`, and not all return paths (specifically line 72) correctly convert `tree` back to a `string` before returning. This indicates an incomplete refactoring that can lead to type errors or unexpected runtime behavior, making the code harder to maintain and debug.",
+      "suggestion": "When changing the type of a variable that is used in multiple return paths, ensure all paths are updated to handle the new type consistently with the function's declared return type. In this case, line 72 needs to be updated to `return tree.join(\"\");` to match the function's signature.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "typescript",
+      "file": "src/utils/tree.ts",
+      "line": 72,
+      "column": 3,
+      "rule": "TS2322",
+      "category": "type_error",
+      "severity": "high",
+      "message": "Type 'string[]' is not assignable to type 'string'.",
+      "inDiff": false
+    },
+    {
+      "source": "llm",
+      "file": "src/utils/tree.ts",
+      "line": 67,
+      "rule": "refactoring",
+      "category": "refactoring",
+      "severity": "high",
+      "message": "The change on this line alters the type of the `tree` variable from `string` to `string[]`. While this allows for conditional joining, it introduces an inconsistency because the `formatTree` function is declared to return a `string`, and not all return paths (specifically line 72) correctly convert `tree` back to a `string` before returning. This indicates an incomplete refactoring that can lead to type errors or unexpected runtime behavior, making the code harder to maintain and debug.",
+      "suggestion": "When changing the type of a variable that is used in multiple return paths, ensure all paths are updated to handle the new type consistently with the function's declared return type. In this case, line 72 needs to be updated to `return tree.join(\"\");` to match the function's signature.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1318,
+    "outputTokens": 242,
+    "totalTokens": 4767
+  },
+  "published": {
+    "inline": 1,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/3#issuecomment-6997980815"
+  }
+}

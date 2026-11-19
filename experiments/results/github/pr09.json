@@ -1,0 +1,84 @@
+{
+  "scenario": "pr09",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 10,
+  "headSha": "77879c6d4ff87ee3b73b93769a29f0a1f77de0a7",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/consola.ts"
+  ],
+  "diffChars": 768,
+  "diffTruncated": false,
+  "staticMs": 18299,
+  "llmMs": 10087,
+  "llmAttempts": 1,
+  "llmErrors": [],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 454,
+      "rule": "coupling",
+      "category": "coupling",
+      "severity": "medium",
+      "message": "The core `_log` method directly checks for a specific reporter instance (`FancyReporter`) and applies special logic. This tightly couples the `Consola` class to a particular reporter implementation.",
+      "suggestion": "The responsibility for handling reporter-specific data formats should reside within the reporter itself. `FancyReporter`'s `log` method should handle the `logObj.title` coercion internally, rather than the core `Consola` class performing this check and modification.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 456,
+      "rule": "cohesion",
+      "category": "cohesion",
+      "severity": "medium",
+      "message": "The `logObj.title` property is modified in place within the `_log` method's iteration. This reduces the cohesion of `_log` as it's now performing data transformation specific to one reporter, rather than just dispatching.",
+      "suggestion": "Modifying the `logObj` in place can lead to unexpected side effects for other reporters. The `FancyReporter` should be responsible for coercing the `title` to a string within its own `log` method, ensuring each reporter receives the original log object or a copy it can modify internally.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 454,
+      "rule": "coupling",
+      "category": "coupling",
+      "severity": "medium",
+      "message": "The core `_log` method directly checks for a specific reporter instance (`FancyReporter`) and applies special logic. This tightly couples the `Consola` class to a particular reporter implementation.",
+      "suggestion": "The responsibility for handling reporter-specific data formats should reside within the reporter itself. `FancyReporter`'s `log` method should handle the `logObj.title` coercion internally, rather than the core `Consola` class performing this check and modification.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 456,
+      "rule": "cohesion",
+      "category": "cohesion",
+      "severity": "medium",
+      "message": "The `logObj.title` property is modified in place within the `_log` method's iteration. This reduces the cohesion of `_log` as it's now performing data transformation specific to one reporter, rather than just dispatching.",
+      "suggestion": "Modifying the `logObj` in place can lead to unexpected side effects for other reporters. The `FancyReporter` should be responsible for coercing the `title` to a string within its own `log` method, ensuring each reporter receives the original log object or a copy it can modify internally.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1585,
+    "outputTokens": 342,
+    "totalTokens": 3500
+  },
+  "published": {
+    "inline": 2,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/10#issuecomment-6998029997"
+  }
+}

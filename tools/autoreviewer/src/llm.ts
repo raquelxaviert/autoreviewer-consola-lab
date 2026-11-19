@@ -162,11 +162,7 @@ export function validateLlmResponse(text: string, patches: Map<string, ParsedPat
       continue;
     }
     const added = patches.get(it.file)!.added;
-    let replacement: string | null = typeof it.replacement === "string" ? it.replacement : null;
-    // Only single-line, actually-changed replacements of an added line can become GitHub suggestions.
-    if (replacement !== null && (!added.has(it.line) || /[\r\n]/.test(replacement) || replacement.length > 300 || replacement.trim() === added.get(it.line)!.trim())) {
-      replacement = null;
-    }
+    const replacement = safeReplacement(typeof it.replacement === "string" ? it.replacement : null, added.get(it.line));
     issues.push({
       source: "llm",
       file: it.file,
@@ -181,6 +177,24 @@ export function validateLlmResponse(text: string, patches: Map<string, ParsedPat
     });
   }
   return { issues, rejected };
+}
+
+const bracketBalance = (s: string) =>
+  [..."{([" ].map((open, i) => s.split(open).length - s.split("})]"[i]).length).join(",");
+
+/**
+ * A replacement becomes a GitHub ```suggestion``` only when it is a single,
+ * actually different line, replacing an added line, with the same bracket
+ * balance as the original (so it cannot break the surrounding block). The
+ * original indentation is restored when the model drops it.
+ */
+export function safeReplacement(replacement: string | null, original: string | undefined): string | null {
+  if (replacement === null || original === undefined) return null;
+  if (/[\r\n]/.test(replacement) || replacement.length > 300 || !replacement.trim()) return null;
+  if (replacement.trim() === original.trim()) return null;
+  if (bracketBalance(replacement) !== bracketBalance(original)) return null;
+  const indent = /^\s*/.exec(original)![0];
+  return /^\s/.test(replacement) ? replacement : indent + replacement;
 }
 
 function rejectReason(it: any, patches: Map<string, ParsedPatch>): string | undefined {

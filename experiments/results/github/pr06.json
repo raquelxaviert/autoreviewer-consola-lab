@@ -1,0 +1,110 @@
+{
+  "scenario": "pr06",
+  "repo": "raquelxaviert/autoreviewer-consola-lab",
+  "pr": 7,
+  "headSha": "d456156b76a0031f24738b95af3139f690993d8a",
+  "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "mode": "hybrid",
+  "files": [
+    "src/reporters/fancy.ts"
+  ],
+  "diffChars": 1816,
+  "diffTruncated": false,
+  "staticMs": 18547,
+  "llmMs": 66225,
+  "llmAttempts": 2,
+  "llmErrors": [
+    "attempt 1: Gemini HTTP 429: You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/g"
+  ],
+  "llmRejected": [],
+  "llmDuplicates": [],
+  "static": [],
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 86,
+      "rule": "complexity",
+      "category": "complexity",
+      "severity": "high",
+      "message": "The `shouldUseBadge` method exhibits excessive cyclomatic complexity due to deeply nested `if/else` statements. This makes the logic difficult to read, understand, and verify, increasing the risk of bugs and making future modifications challenging. The method's intent is obscured by its convoluted structure.",
+      "suggestion": "Refactor the method to flatten the conditional logic using early returns and by combining conditions where appropriate. Consider breaking down the decision-making process into smaller, more focused checks to improve readability and maintainability.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 102,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The condition `logObj.level === 0 || logObj.level === 1 || logObj.level < 0` is redundant. It is nested within `if (logObj.level < 2)`, which for typical integer log levels already implies that `logObj.level` must be `1`, `0`, or less than `0`. This adds unnecessary code and cognitive load without altering the outcome.",
+      "suggestion": "Remove the redundant inner `if` statement. The `return true` can directly follow the `if (logObj.level < 2)` condition.",
+      "replacement": "            return true;",
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 93,
+      "rule": "cohesion",
+      "category": "cohesion",
+      "severity": "medium",
+      "message": "The handling of `logObj.badge` when it's a defined but non-boolean value (e.g., a number like `1` or `0`, or a string) is ambiguous and inconsistent with the previous behavior. The original code would coerce such values to `true` or `false` based on their truthiness, whereas the new logic introduces a dependency on `logObj.level < 2`. This implicit change in interpretation makes the code harder to reason about and maintain, as the intended behavior for non-boolean `badge` values is not clearly defined or consistently applied.",
+      "suggestion": "Clearly define the expected types and behavior for `logObj.badge`. If non-boolean values should be treated as booleans based on truthiness, implement that explicitly (e.g., `!!logObj.badge`). If they should trigger level-based logic, document this and simplify the conditional structure to make the intent explicit.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 86,
+      "rule": "complexity",
+      "category": "complexity",
+      "severity": "high",
+      "message": "The `shouldUseBadge` method exhibits excessive cyclomatic complexity due to deeply nested `if/else` statements. This makes the logic difficult to read, understand, and verify, increasing the risk of bugs and making future modifications challenging. The method's intent is obscured by its convoluted structure.",
+      "suggestion": "Refactor the method to flatten the conditional logic using early returns and by combining conditions where appropriate. Consider breaking down the decision-making process into smaller, more focused checks to improve readability and maintainability.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 102,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The condition `logObj.level === 0 || logObj.level === 1 || logObj.level < 0` is redundant. It is nested within `if (logObj.level < 2)`, which for typical integer log levels already implies that `logObj.level` must be `1`, `0`, or less than `0`. This adds unnecessary code and cognitive load without altering the outcome.",
+      "suggestion": "Remove the redundant inner `if` statement. The `return true` can directly follow the `if (logObj.level < 2)` condition.",
+      "replacement": "            return true;",
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 93,
+      "rule": "cohesion",
+      "category": "cohesion",
+      "severity": "medium",
+      "message": "The handling of `logObj.badge` when it's a defined but non-boolean value (e.g., a number like `1` or `0`, or a string) is ambiguous and inconsistent with the previous behavior. The original code would coerce such values to `true` or `false` based on their truthiness, whereas the new logic introduces a dependency on `logObj.level < 2`. This implicit change in interpretation makes the code harder to reason about and maintain, as the intended behavior for non-boolean `badge` values is not clearly defined or consistently applied.",
+      "suggestion": "Clearly define the expected types and behavior for `logObj.badge`. If non-boolean values should be treated as booleans based on truthiness, implement that explicitly (e.g., `!!logObj.badge`). If they should trigger level-based logic, document this and simplify the conditional structure to make the intent explicit.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 2404,
+    "outputTokens": 603,
+    "totalTokens": 10374
+  },
+  "published": {
+    "inline": 3,
+    "skippedExisting": 0,
+    "errors": [],
+    "summaryUrl": "https://github.com/raquelxaviert/autoreviewer-consola-lab/pull/7#issuecomment-6998007865"
+  }
+}
