@@ -43,5 +43,6 @@ export function compileFormat(format: string) {
  * @returns {string} The formatted string.
  */
 export function formatString(format: string, argv: any) {
-  return vsprintf(compileFormat(format), argv);
+  let compiled = compileFormat(format);
+  return vsprintf(compiled, argv);
 }
