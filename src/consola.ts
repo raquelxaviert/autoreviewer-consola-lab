@@ -422,13 +422,14 @@ export class Consola {
     this._lastLog.time = logObj.date;
     if (diffTime < this.options.throttle) {
       try {
-        const serializedLog = JSON.stringify([
+        const isSameLog =
+          this._lastLog.serialized ===
+          JSON.stringify([logObj.type, logObj.tag, logObj.args]);
+        this._lastLog.serialized = JSON.stringify([
           logObj.type,
           logObj.tag,
           logObj.args,
         ]);
-        const isSameLog = this._lastLog.serialized === serializedLog;
-        this._lastLog.serialized = serializedLog;
         if (isSameLog) {
           this._lastLog.count = (this._lastLog.count || 0) + 1;
           if (this._lastLog.count > this.options.throttleMin) {
