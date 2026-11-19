@@ -450,9 +450,13 @@ export class Consola {
 
   _log(logObj: LogObject) {
     for (const reporter of this.options.reporters) {
-      reporter.log(logObj, {
-        options: this.options,
-      });
+      try {
+        reporter.log(logObj, {
+          options: this.options,
+        });
+      } catch {
+        // ignore reporter failures
+      }
     }
   }
 }
