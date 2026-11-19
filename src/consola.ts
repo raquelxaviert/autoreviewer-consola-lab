@@ -8,6 +8,7 @@ import type {
   ConsolaOptions,
 } from "./types";
 import type { PromptOptions } from "./prompt";
+import { FancyReporter } from "./reporters/fancy";
 
 let paused = false;
 const queue: any[] = [];
@@ -450,6 +451,10 @@ export class Consola {
 
   _log(logObj: LogObject) {
     for (const reporter of this.options.reporters) {
+      if (reporter instanceof FancyReporter && logObj.type === "box") {
+        // FancyReporter expects box titles to be strings
+        logObj.title = String(logObj.title ?? "");
+      }
       reporter.log(logObj, {
         options: this.options,
       });
