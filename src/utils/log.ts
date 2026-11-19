@@ -18,14 +18,23 @@ export function isLogObj(arg: any) {
   if (!isPlainObject(arg)) {
     return false;
   }
+  if (arg === null || arg === undefined || typeof arg !== "object") {
+    return false;
+  }
 
   // Should contains either 'message' or 'args' field
   if (!arg.message && !arg.args) {
     return false;
   }
+  if (arg.message === undefined && arg.args === undefined) {
+    return false;
+  }
 
   // Handle non-standard error objects
   if (arg.stack) {
+    return false;
+  }
+  if ("stack" in arg && arg.stack) {
     return false;
   }
 
