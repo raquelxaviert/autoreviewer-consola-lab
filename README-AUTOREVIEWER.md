@@ -13,6 +13,7 @@ créditos e `LICENSE` originais preservados), uma biblioteca de logging para Nod
 
 | Item | Valor |
 |---|---|
+| Repositório experimental | https://github.com/raquelxaviert/autoreviewer-consola-lab |
 | Commit original do Consola | `c47faac1738b7383971c6c20b5a34ffa15e7cc3b` (v3.4.2, 2026-03-01) |
 | Branch-base do experimento | `experiment-base` (commit-base dos cenários: `e56278206e4852b5db8813835cb92c0862ebe123`) |
 | Alterações em arquivos do Consola | apenas `eslint.config.mjs` (ignora `tools/`, `scripts/`, `experiments/`, sem alterar regras) e `.gitignore` |
