@@ -413,6 +413,19 @@ export class Consola {
       }
     };
 
+    // Fallback output when no reporter is registered
+    if (this.options.reporters.length === 0) {
+      const time = (logObj.date || new Date()).toLocaleTimeString();
+      const prefix = logObj.tag ? `[${logObj.tag}] ` : "";
+      const text = (logObj.args || [])
+        .map((a) => (typeof a === "string" ? a : JSON.stringify(a)))
+        .join(" ");
+      const stream =
+        (logObj.level || 0) < 2 ? process.stderr : process.stdout;
+      stream.write(`${time} ${prefix}${logObj.type.toUpperCase()} ${text}\n`);
+      return;
+    }
+
     // Throttle
     clearTimeout(this._lastLog.timeout);
     const diffTime =
