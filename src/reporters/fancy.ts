@@ -64,10 +64,7 @@ export class FancyReporter extends BasicReporter {
   }
 
   formatType(logObj: LogObject, isBadge: boolean, opts: FormatOptions) {
-    const typeColor =
-      (TYPE_COLOR_MAP as any)[logObj.type] ||
-      (LEVEL_COLOR_MAP as any)[logObj.level] ||
-      "gray";
+    const typeColor = getTypeColor(logObj);
 
     if (isBadge) {
       return getBgColor(typeColor)(
@@ -132,6 +129,14 @@ export class FancyReporter extends BasicReporter {
 
     return isBadge ? "\n" + line + "\n" : line;
   }
+}
+
+function getTypeColor(logObj: LogObject): string {
+  return (
+    (TYPE_COLOR_MAP as any)[logObj.type] ||
+    (LEVEL_COLOR_MAP as any)[logObj.level] ||
+    "gray"
+  );
 }
 
 function characterFormat(str: string) {
