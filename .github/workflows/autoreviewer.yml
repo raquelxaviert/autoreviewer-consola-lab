@@ -1,3 +1,4 @@
+# AutoReviewer: ESLint + tsc (job 1, untrusted) and Gemini review/publication (job 2, trusted).
 name: AutoReviewer
 
 on:
