@@ -449,11 +449,11 @@ export class Consola {
   }
 
   _log(logObj: LogObject) {
-    for (const reporter of this.options.reporters) {
+    this.options.reporters.forEach((reporter) => {
       reporter.log(logObj, {
         options: this.options,
       });
-    }
+    });
   }
 }
 
