@@ -95,7 +95,7 @@ export class FancyReporter extends BasicReporter {
         ),
         {
           title: logObj.title
-            ? characterFormat(logObj.title as string)
+            ? formatBoxTitle(logObj.title as string)
             : undefined,
           style: logObj.style as BoxOpts["style"],
         },
@@ -137,6 +137,16 @@ export class FancyReporter extends BasicReporter {
 function characterFormat(str: string) {
   return (
     str
+      // highlight backticks
+      .replace(/`([^`]+)`/gm, (_, m) => colors.cyan(m))
+      // underline underscores
+      .replace(/\s+_([^_]+)_\s+/gm, (_, m) => ` ${colors.underline(m)} `)
+  );
+}
+
+function formatBoxTitle(title: string) {
+  return (
+    title
       // highlight backticks
       .replace(/`([^`]+)`/gm, (_, m) => colors.cyan(m))
       // underline underscores
