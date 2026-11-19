@@ -65,9 +65,7 @@ export class FancyReporter extends BasicReporter {
 
   formatType(logObj: LogObject, isBadge: boolean, opts: FormatOptions) {
     const typeColor =
-      (TYPE_COLOR_MAP as any)[logObj.type] ||
-      (LEVEL_COLOR_MAP as any)[logObj.level] ||
-      "gray";
+      TYPE_COLOR_MAP[logObj.type] || LEVEL_COLOR_MAP[logObj.level] || "gray";
 
     if (isBadge) {
       return getBgColor(typeColor)(
@@ -75,10 +73,9 @@ export class FancyReporter extends BasicReporter {
       );
     }
 
-    const _type =
-      typeof (TYPE_ICONS as any)[logObj.type] === "string"
-        ? (TYPE_ICONS as any)[logObj.type]
-        : (logObj as any).icon || logObj.type;
+    const icon = TYPE_ICONS[logObj.type];
+    const _type: string =
+      typeof icon === "string" ? icon : (logObj.icon as string) || logObj.type;
 
     return _type ? getColor(typeColor)(_type) : "";
   }
