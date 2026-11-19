@@ -1,0 +1,23 @@
+From 72b685de66a0d3b0a964892b8dd3339d3f2de7fa Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:18 -0300
+Subject: [PATCH] feat(fancy): show current time instead of log date
+
+AutoReviewer experimental scenario pr01.
+---
+ src/reporters/fancy.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/reporters/fancy.ts b/src/reporters/fancy.ts
+index 3c58b27..a2b6c58 100644
+--- a/src/reporters/fancy.ts
++++ b/src/reporters/fancy.ts
+@@ -102,7 +102,7 @@ export class FancyReporter extends BasicReporter {
+       );
+     }
+ 
+-    const date = this.formatDate(logObj.date, opts);
++    const date = this.formatDate(Date.now(), opts);
+     const coloredDate = date && colors.gray(date);
+ 
+     const isBadge = (logObj.badge as boolean) ?? logObj.level < 2;

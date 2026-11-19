@@ -1,0 +1,26 @@
+From 12d01c5e12a754c506b48f3f3ca37f1286d8034b Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:18 -0300
+Subject: [PATCH] refactor(tree): avoid joining tree chunks twice
+
+AutoReviewer experimental scenario pr02.
+---
+ src/utils/tree.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/utils/tree.ts b/src/utils/tree.ts
+index 17ad379..4440d0f 100644
+--- a/src/utils/tree.ts
++++ b/src/utils/tree.ts
+@@ -64,9 +64,9 @@ export function formatTree(items: TreeItem[], options?: TreeOptions): string {
+     ...options,
+   };
+ 
+-  const tree = _buildTree(items, options).join("");
++  const tree = _buildTree(items, options);
+   if (options && options.color) {
+-    return colorize(options.color, tree);
++    return colorize(options.color, tree.join(""));
+   }
+ 
+   return tree;

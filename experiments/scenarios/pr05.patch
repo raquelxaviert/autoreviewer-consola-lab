@@ -1,0 +1,40 @@
+From 90cd9a4d8edd59fef2d1dbe5f5cd4978a03a50a1 Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:19 -0300
+Subject: [PATCH] feat(fancy): format box titles with their own helper
+
+AutoReviewer experimental scenario pr05.
+---
+ src/reporters/fancy.ts | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/src/reporters/fancy.ts b/src/reporters/fancy.ts
+index 3c58b27..a927a1f 100644
+--- a/src/reporters/fancy.ts
++++ b/src/reporters/fancy.ts
+@@ -95,7 +95,7 @@ export class FancyReporter extends BasicReporter {
+         ),
+         {
+           title: logObj.title
+-            ? characterFormat(logObj.title as string)
++            ? formatBoxTitle(logObj.title as string)
+             : undefined,
+           style: logObj.style as BoxOpts["style"],
+         },
+@@ -144,6 +144,16 @@ function characterFormat(str: string) {
+   );
+ }
+ 
++function formatBoxTitle(title: string) {
++  return (
++    title
++      // highlight backticks
++      .replace(/`([^`]+)`/gm, (_, m) => colors.cyan(m))
++      // underline underscores
++      .replace(/\s+_([^_]+)_\s+/gm, (_, m) => ` ${colors.underline(m)} `)
++  );
++}
++
+ function getColor(color = "white") {
+   return (colors as any)[color] || colors.white;
+ }

@@ -16,6 +16,7 @@ const arg = (name, def) => (argv.includes(name) ? argv[argv.indexOf(name) + 1] :
 const BASE = arg("--base", "experiment-base");
 const ONLY = arg("--only", "")?.split(",").filter(Boolean);
 const WORK = path.join(ROOT, "experiments/work/gen");
+const CHECK = argv.includes("--check");
 
 export const SCENARIOS = [
   {
@@ -240,11 +241,11 @@ function getColor(color = "white") {`,
       },
       {
         file: "src/consola.ts",
-        find: `          this._lastLog.timeout = setTimeout(
-            resolveLog,
-            this.options.throttle,
-          );`,
-        replace: `          this._lastLog.timeout = setTimeout(fn, this.options.throttle);`,
+        find: `            this._lastLog.timeout = setTimeout(
+              resolveLog,
+              this.options.throttle,
+            );`,
+        replace: `            this._lastLog.timeout = setTimeout(fn, this.options.throttle);`,
       },
       {
         file: "src/consola.ts",
@@ -481,8 +482,27 @@ function git(args, cwd = WORK) {
   return execFileSync("git", args, { cwd, encoding: "utf8" }).trim();
 }
 
+function check(baseSha) {
+  let ok = true;
+  for (const s of SCENARIOS) {
+    const files = {};
+    for (const e of s.edits) {
+      files[e.file] ??= git(["show", `${baseSha}:${e.file}`], ROOT);
+      const count = files[e.file].split(e.find).length - 1;
+      if (count !== 1) {
+        ok = false;
+        console.log(`${s.id}: edit target found ${count} times in ${e.file}: ${JSON.stringify(e.find.slice(0, 80))}`);
+      }
+      files[e.file] = files[e.file].replace(e.find, () => e.replace);
+    }
+  }
+  console.log(ok ? "all edits apply cleanly" : "some edits do not apply");
+  process.exitCode = ok ? 0 : 1;
+}
+
 function main() {
   const baseSha = git(["rev-parse", BASE], ROOT);
+  if (CHECK) return check(baseSha);
   if (fs.existsSync(WORK)) git(["worktree", "remove", "--force", WORK], ROOT);
   git(["worktree", "add", "--detach", WORK, baseSha], ROOT);
   const outDir = path.join(ROOT, "experiments/scenarios");

@@ -1,0 +1,22 @@
+From 42083faea0264f8c796fc1d67009b51ca56e6e7c Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:19 -0300
+Subject: [PATCH] refactor(format): name the compiled format before formatting
+
+AutoReviewer experimental scenario pr03.
+---
+ src/utils/format.ts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/utils/format.ts b/src/utils/format.ts
+index d09248c..698059c 100644
+--- a/src/utils/format.ts
++++ b/src/utils/format.ts
+@@ -43,5 +43,6 @@ export function compileFormat(format: string) {
+  * @returns {string} The formatted string.
+  */
+ export function formatString(format: string, argv: any) {
+-  return vsprintf(compileFormat(format), argv);
++  let compiled = compileFormat(format);
++  return vsprintf(compiled, argv);
+ }
