@@ -2,19 +2,51 @@
   "scenario": "pr05",
   "headSha": "4cbe01305ad42b2cf14fb73afd4082c9d367c6cc",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/reporters/fancy.ts"
   ],
   "diffChars": 968,
   "diffTruncated": false,
-  "staticMs": 22439,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 18923,
+  "llmMs": 6906,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
   "static": [],
-  "llm": [],
-  "hybrid": []
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 147,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The `formatBoxTitle` function is an exact duplicate of the `characterFormat` function. This introduces redundant code, making the codebase harder to maintain. Any future changes or bug fixes to this formatting logic would need to be applied in two places, increasing the risk of inconsistencies and errors.",
+      "suggestion": "Remove the `formatBoxTitle` function and reuse the existing `characterFormat` function for formatting box titles. The `characterFormat` function already provides the exact same functionality.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 147,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The `formatBoxTitle` function is an exact duplicate of the `characterFormat` function. This introduces redundant code, making the codebase harder to maintain. Any future changes or bug fixes to this formatting logic would need to be applied in two places, increasing the risk of inconsistencies and errors.",
+      "suggestion": "Remove the `formatBoxTitle` function and reuse the existing `characterFormat` function for formatting box titles. The `characterFormat` function already provides the exact same functionality.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1935,
+    "outputTokens": 171,
+    "totalTokens": 3293
+  }
 }

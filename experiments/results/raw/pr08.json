@@ -2,19 +2,99 @@
   "scenario": "pr08",
   "headSha": "8c02715c137e26a5af43ef4da18a5c82428c458c",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/consola.ts"
   ],
   "diffChars": 872,
   "diffTruncated": false,
-  "staticMs": 22193,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 18466,
+  "llmMs": 14101,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
   "static": [],
-  "llm": [],
-  "hybrid": []
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 423,
+      "rule": "coupling",
+      "category": "coupling",
+      "severity": "high",
+      "message": "The fallback output directly uses `process.stderr` and `process.stdout`. The `process` global is Node.js-specific and will not be available in browser environments, causing runtime errors or unexpected behavior when Consola is used in the browser with no reporters configured. Consola is designed to be cross-environment compatible.",
+      "suggestion": "Abstract the stream selection to use `console.error` and `console.log` for browser compatibility, or ensure this fallback path is only active in Node.js environments. A more robust solution would be to encapsulate this logic within a `BasicReporter` that handles environment differences.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 417,
+      "rule": "cohesion",
+      "category": "cohesion",
+      "severity": "medium",
+      "message": "The `_log` method's primary responsibility is to dispatch log objects to registered reporters. Introducing direct rendering and formatting logic (lines 418-425) within `_log` makes the method less cohesive and blurs the separation of concerns. This rendering logic rightfully belongs within a reporter.",
+      "suggestion": "Encapsulate this fallback rendering logic into a dedicated, minimal `BasicConsoleReporter` class or function. This reporter could then be conditionally added to `this.options.reporters` if it's empty, maintaining the reporter pattern and keeping `_log` focused on dispatch.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 417,
+      "rule": "refactoring",
+      "category": "refactoring",
+      "severity": "low",
+      "message": "The fallback output is hardcoded within the `_log` method, making it difficult for users to customize its formatting or behavior without completely replacing the `Consola` class or adding a custom reporter (which would then disable this fallback).",
+      "suggestion": "By implementing the fallback as a default `BasicConsoleReporter` (as suggested for cohesion), it could potentially be exposed as a configurable option or be easier to replace/modify for users who need a slightly different default output.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 423,
+      "rule": "coupling",
+      "category": "coupling",
+      "severity": "high",
+      "message": "The fallback output directly uses `process.stderr` and `process.stdout`. The `process` global is Node.js-specific and will not be available in browser environments, causing runtime errors or unexpected behavior when Consola is used in the browser with no reporters configured. Consola is designed to be cross-environment compatible.",
+      "suggestion": "Abstract the stream selection to use `console.error` and `console.log` for browser compatibility, or ensure this fallback path is only active in Node.js environments. A more robust solution would be to encapsulate this logic within a `BasicReporter` that handles environment differences.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 417,
+      "rule": "cohesion",
+      "category": "cohesion",
+      "severity": "medium",
+      "message": "The `_log` method's primary responsibility is to dispatch log objects to registered reporters. Introducing direct rendering and formatting logic (lines 418-425) within `_log` makes the method less cohesive and blurs the separation of concerns. This rendering logic rightfully belongs within a reporter.",
+      "suggestion": "Encapsulate this fallback rendering logic into a dedicated, minimal `BasicConsoleReporter` class or function. This reporter could then be conditionally added to `this.options.reporters` if it's empty, maintaining the reporter pattern and keeping `_log` focused on dispatch.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 417,
+      "rule": "refactoring",
+      "category": "refactoring",
+      "severity": "low",
+      "message": "The fallback output is hardcoded within the `_log` method, making it difficult for users to customize its formatting or behavior without completely replacing the `Consola` class or adding a custom reporter (which would then disable this fallback).",
+      "suggestion": "By implementing the fallback as a default `BasicConsoleReporter` (as suggested for cohesion), it could potentially be exposed as a configurable option or be easier to replace/modify for users who need a slightly different default output.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1633,
+    "outputTokens": 537,
+    "totalTokens": 4431
+  }
 }

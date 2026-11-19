@@ -2,15 +2,15 @@
   "scenario": "pr04",
   "headSha": "501e8698ffc41689eea729df2c52e8035fafbcd4",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/consola.ts"
   ],
   "diffChars": 414,
   "diffTruncated": false,
-  "staticMs": 23129,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 19211,
+  "llmMs": 5414,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
@@ -40,5 +40,11 @@
       "message": "Use `for…of` instead of `.forEach(…)`.",
       "inDiff": true
     }
-  ]
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1205,
+    "outputTokens": 9,
+    "totalTokens": 2064
+  }
 }

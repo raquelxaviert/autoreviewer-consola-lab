@@ -2,19 +2,51 @@
   "scenario": "pr12",
   "headSha": "bc6ffdf7158cee801ca5f71847b090f6c0080617",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/consola.ts"
   ],
   "diffChars": 521,
   "diffTruncated": false,
-  "staticMs": 22691,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 18766,
+  "llmMs": 6950,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
   "static": [],
-  "llm": [],
-  "hybrid": []
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 457,
+      "rule": "error_handling",
+      "category": "error_handling",
+      "severity": "high",
+      "message": "The `catch` block silently ignores any errors thrown by a reporter's `log` method. This hides critical failures, making it impossible to diagnose why log messages might not be appearing as expected or if a custom reporter is buggy. This significantly impacts the maintainability and reliability of the logging system, as users will have no indication that their logs are not being processed correctly.",
+      "suggestion": "Instead of silently ignoring, the error should at least be logged to `console.error` or a dedicated internal error stream. A more robust solution would be to allow users to configure an error handler for reporter failures, or to have a fallback mechanism to report such internal errors, providing visibility into issues without crashing the application.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 457,
+      "rule": "error_handling",
+      "category": "error_handling",
+      "severity": "high",
+      "message": "The `catch` block silently ignores any errors thrown by a reporter's `log` method. This hides critical failures, making it impossible to diagnose why log messages might not be appearing as expected or if a custom reporter is buggy. This significantly impacts the maintainability and reliability of the logging system, as users will have no indication that their logs are not being processed correctly.",
+      "suggestion": "Instead of silently ignoring, the error should at least be logged to `console.error` or a dedicated internal error stream. A more robust solution would be to allow users to configure an error handler for reporter failures, or to have a fallback mechanism to report such internal errors, providing visibility into issues without crashing the application.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1204,
+    "outputTokens": 216,
+    "totalTokens": 2392
+  }
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "scenario": "pr02",
+    "source": "llm",
+    "file": "src/utils/tree.ts",
+    "line": 67,
+    "rule": "refactoring",
+    "verdict": "duplicate",
+    "issueId": "pr02-1",
+    "justification": "The comment explains that 'tree' became string[] while formatTree is declared to return string, i.e. it restates the TS2322 already reported by tsc (at line 72, outside the added lines, so the automatic +/-1 line deduplication could not catch it). Counted as a duplicate recommendation, neither TP nor FP."
+  },
+  {
+    "scenario": "pr06",
+    "source": "llm",
+    "file": "src/reporters/fancy.ts",
+    "line": 102,
+    "rule": "duplication",
+    "verdict": "duplicate",
+    "issueId": "pr06-1",
+    "justification": "Points at the redundant condition inside shouldUseBadge, which the ground truth explicitly lists as part of pr06-1 ('nested conditionals ... and redundant checks'). Second comment on the same planted problem: duplicate, not an extra TP and not an FP."
+  }
+]

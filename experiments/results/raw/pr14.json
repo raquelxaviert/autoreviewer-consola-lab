@@ -2,19 +2,51 @@
   "scenario": "pr14",
   "headSha": "845e4624f71b9d65d10494f8fa8fb612c02bde39",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/reporters/fancy.ts"
   ],
   "diffChars": 1094,
   "diffTruncated": false,
-  "staticMs": 25735,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 18774,
+  "llmMs": 15593,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
   "static": [],
-  "llm": [],
-  "hybrid": []
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 78,
+      "rule": "error_handling",
+      "category": "error_handling",
+      "severity": "high",
+      "message": "The `(logObj.icon as string)` assertion is unsafe. According to the `LogObject` type, `logObj.icon` can be a function. If `logObj.icon` is a function, casting it to `string` will not convert it to a string representation of the icon, but rather keep it as a function object. This function object will then be passed to `getColor`, which expects a string, leading to incorrect rendering (e.g., `[object Function]`) or runtime errors.",
+      "suggestion": "Explicitly check the type of `logObj.icon`. If it's a function, call it with `logObj` to get the icon string. If it's a string, use it directly. This ensures the correct icon string is resolved and passed to `getColor`.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 78,
+      "rule": "error_handling",
+      "category": "error_handling",
+      "severity": "high",
+      "message": "The `(logObj.icon as string)` assertion is unsafe. According to the `LogObject` type, `logObj.icon` can be a function. If `logObj.icon` is a function, casting it to `string` will not convert it to a string representation of the icon, but rather keep it as a function object. This function object will then be passed to `getColor`, which expects a string, leading to incorrect rendering (e.g., `[object Function]`) or runtime errors.",
+      "suggestion": "Explicitly check the type of `logObj.icon`. If it's a function, call it with `logObj` to get the icon string. If it's a string, use it directly. This ensures the correct icon string is resolved and passed to `getColor`.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1546,
+    "outputTokens": 243,
+    "totalTokens": 4937
+  }
 }

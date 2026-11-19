@@ -2,15 +2,15 @@
   "scenario": "pr03",
   "headSha": "7602cc6f20f87ef297e8f60c5317a3d2483ec913",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/utils/format.ts"
   ],
   "diffChars": 394,
   "diffTruncated": false,
-  "staticMs": 23434,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 19014,
+  "llmMs": 10386,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
@@ -27,7 +27,20 @@
       "inDiff": true
     }
   ],
-  "llm": [],
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/utils/format.ts",
+      "line": 46,
+      "rule": "refactoring",
+      "category": "refactoring",
+      "severity": "low",
+      "message": "Introducing a temporary variable `compiled` to store the result of `compileFormat(format)` before immediately passing it to `vsprintf` adds unnecessary verbosity. The original one-liner was more concise and equally clear, as `compileFormat` is a simple function call whose result is directly consumed. This change does not improve readability, debugging, or performance.",
+      "suggestion": "Revert to the original one-liner to maintain conciseness and directness, avoiding an unnecessary temporary variable.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
   "hybrid": [
     {
       "source": "eslint",
@@ -39,6 +52,24 @@
       "severity": "medium",
       "message": "'compiled' is never reassigned. Use 'const' instead.",
       "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/utils/format.ts",
+      "line": 46,
+      "rule": "refactoring",
+      "category": "refactoring",
+      "severity": "low",
+      "message": "Introducing a temporary variable `compiled` to store the result of `compileFormat(format)` before immediately passing it to `vsprintf` adds unnecessary verbosity. The original one-liner was more concise and equally clear, as `compileFormat` is a simple function call whose result is directly consumed. This change does not improve readability, debugging, or performance.",
+      "suggestion": "Revert to the original one-liner to maintain conciseness and directness, avoiding an unnecessary temporary variable.",
+      "replacement": null,
+      "inDiff": true
     }
-  ]
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 963,
+    "outputTokens": 171,
+    "totalTokens": 2833
+  }
 }

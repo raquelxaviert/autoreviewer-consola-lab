@@ -2,19 +2,51 @@
   "scenario": "pr15",
   "headSha": "45fe31ab19b22ad1e86ad64bb986a44154d8ef29",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/utils/string.ts"
   ],
   "diffChars": 462,
   "diffTruncated": false,
-  "staticMs": 24324,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 19230,
+  "llmMs": 12015,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
   "static": [],
-  "llm": [],
-  "hybrid": []
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/utils/string.ts",
+      "line": 72,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "low",
+      "message": "The `if (str.length >= len) { return str; }` check is duplicated in both `leftAlign` (added here) and `rightAlign` functions. While simple, this pattern, if its behavior were to evolve (e.g., to truncate instead of return as-is), would require changes in multiple places, increasing maintenance effort.",
+      "suggestion": "Refactor this common guard logic into a small, private helper function that can be called by all alignment utilities. This centralizes the behavior for strings that are already long enough, making future modifications more consistent and easier.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/utils/string.ts",
+      "line": 72,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "low",
+      "message": "The `if (str.length >= len) { return str; }` check is duplicated in both `leftAlign` (added here) and `rightAlign` functions. While simple, this pattern, if its behavior were to evolve (e.g., to truncate instead of return as-is), would require changes in multiple places, increasing maintenance effort.",
+      "suggestion": "Refactor this common guard logic into a small, private helper function that can be called by all alignment utilities. This centralizes the behavior for strings that are already long enough, making future modifications more consistent and easier.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1316,
+    "outputTokens": 192,
+    "totalTokens": 3698
+  }
 }

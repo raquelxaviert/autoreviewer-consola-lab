@@ -9,8 +9,8 @@
     "duplicates": 0,
     "precision": 1,
     "recall": 0.3333333333333333,
-    "totalMs": 353319,
-    "meanMs": 23555
+    "totalMs": 282469,
+    "meanMs": 18831
   },
   "scenarios": [
     {
@@ -23,7 +23,7 @@
       "duplicates": 0,
       "precision": 1,
       "recall": 1,
-      "timeMs": 25269,
+      "timeMs": 19215,
       "matchedIssues": [
         "pr01-1"
       ],
@@ -54,7 +54,7 @@
       "duplicates": 0,
       "precision": 1,
       "recall": 1,
-      "timeMs": 22838,
+      "timeMs": 19422,
       "matchedIssues": [
         "pr02-1"
       ],
@@ -85,7 +85,7 @@
       "duplicates": 0,
       "precision": 1,
       "recall": 1,
-      "timeMs": 23434,
+      "timeMs": 19014,
       "matchedIssues": [
         "pr03-1"
       ],
@@ -116,7 +116,7 @@
       "duplicates": 0,
       "precision": 1,
       "recall": 1,
-      "timeMs": 23129,
+      "timeMs": 19211,
       "matchedIssues": [
         "pr04-1"
       ],
@@ -147,7 +147,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": 0,
-      "timeMs": 22439,
+      "timeMs": 18923,
       "matchedIssues": [],
       "missedIssues": [
         "pr05-1"
@@ -164,7 +164,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": 0,
-      "timeMs": 23296,
+      "timeMs": 18547,
       "matchedIssues": [],
       "missedIssues": [
         "pr06-1"
@@ -181,7 +181,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": 0,
-      "timeMs": 22047,
+      "timeMs": 18658,
       "matchedIssues": [],
       "missedIssues": [
         "pr07-1"
@@ -198,7 +198,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": 0,
-      "timeMs": 22193,
+      "timeMs": 18466,
       "matchedIssues": [],
       "missedIssues": [
         "pr08-1"
@@ -215,7 +215,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": 0,
-      "timeMs": 23229,
+      "timeMs": 18299,
       "matchedIssues": [],
       "missedIssues": [
         "pr09-1"
@@ -232,7 +232,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": 0,
-      "timeMs": 22830,
+      "timeMs": 18662,
       "matchedIssues": [],
       "missedIssues": [
         "pr10-1"
@@ -249,7 +249,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": 0,
-      "timeMs": 24113,
+      "timeMs": 18445,
       "matchedIssues": [],
       "missedIssues": [
         "pr11-1"
@@ -266,7 +266,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": 0,
-      "timeMs": 22691,
+      "timeMs": 18766,
       "matchedIssues": [],
       "missedIssues": [
         "pr12-1"
@@ -283,7 +283,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": null,
-      "timeMs": 25752,
+      "timeMs": 18837,
       "matchedIssues": [],
       "missedIssues": [],
       "findings": []
@@ -298,7 +298,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": null,
-      "timeMs": 25735,
+      "timeMs": 18774,
       "matchedIssues": [],
       "missedIssues": [],
       "findings": []
@@ -313,7 +313,7 @@
       "duplicates": 0,
       "precision": null,
       "recall": null,
-      "timeMs": 24324,
+      "timeMs": 19230,
       "matchedIssues": [],
       "missedIssues": [],
       "findings": []

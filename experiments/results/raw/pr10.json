@@ -2,19 +2,99 @@
   "scenario": "pr10",
   "headSha": "1976c401771014c552dd4381522757095853118a",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/utils/log.ts"
   ],
   "diffChars": 792,
   "diffTruncated": false,
-  "staticMs": 22830,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 18662,
+  "llmMs": 17409,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
   "static": [],
-  "llm": [],
-  "hybrid": []
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/utils/log.ts",
+      "line": 21,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The check `if (arg === null || arg === undefined || typeof arg !== \"object\")` is redundant. The preceding `if (!isPlainObject(arg))` on line 18 already covers these cases, as `isPlainObject` returns `false` for `null`, `undefined`, and non-object types.",
+      "suggestion": "Remove the added lines 21-23 as they do not add new validation and increase code complexity.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/utils/log.ts",
+      "line": 29,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The check `if (arg.message === undefined && arg.args === undefined)` is redundant. The preceding `if (!arg.message && !arg.args)` on line 26 already covers the case where `arg.message` and `arg.args` are `undefined` (as `undefined` is a falsy value). If the intent was to strictly check for `undefined` and not other falsy values (like `null` or `\"\"`), then the original line 26 should have been replaced, not duplicated.",
+      "suggestion": "Remove the added lines 29-31. The existing check on line 26 is sufficient for identifying missing or empty message/args.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/utils/log.ts",
+      "line": 37,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The check `if (\"stack\" in arg && arg.stack)` is redundant. The preceding `if (arg.stack)` on line 34 already effectively covers this condition. If `arg.stack` is truthy, it implies the property exists, making the `\"stack\" in arg` check unnecessary for the purpose of returning `false` when a truthy `stack` property is present.",
+      "suggestion": "Remove the added lines 37-39 as they duplicate the logic of the existing check on line 34.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/utils/log.ts",
+      "line": 21,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The check `if (arg === null || arg === undefined || typeof arg !== \"object\")` is redundant. The preceding `if (!isPlainObject(arg))` on line 18 already covers these cases, as `isPlainObject` returns `false` for `null`, `undefined`, and non-object types.",
+      "suggestion": "Remove the added lines 21-23 as they do not add new validation and increase code complexity.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/utils/log.ts",
+      "line": 29,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The check `if (arg.message === undefined && arg.args === undefined)` is redundant. The preceding `if (!arg.message && !arg.args)` on line 26 already covers the case where `arg.message` and `arg.args` are `undefined` (as `undefined` is a falsy value). If the intent was to strictly check for `undefined` and not other falsy values (like `null` or `\"\"`), then the original line 26 should have been replaced, not duplicated.",
+      "suggestion": "Remove the added lines 29-31. The existing check on line 26 is sufficient for identifying missing or empty message/args.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/utils/log.ts",
+      "line": 37,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "medium",
+      "message": "The check `if (\"stack\" in arg && arg.stack)` is redundant. The preceding `if (arg.stack)` on line 34 already effectively covers this condition. If `arg.stack` is truthy, it implies the property exists, making the `\"stack\" in arg` check unnecessary for the purpose of returning `false` when a truthy `stack` property is present.",
+      "suggestion": "Remove the added lines 37-39 as they duplicate the logic of the existing check on line 34.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1340,
+    "outputTokens": 543,
+    "totalTokens": 5156
+  }
 }

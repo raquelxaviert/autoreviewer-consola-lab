@@ -1,233 +1,535 @@
 {
   "mode": "hybrid",
   "aggregate": {
-    "scenariosEvaluated": 0,
-    "scenariosPending": 15,
-    "tp": 0,
-    "fp": 0,
+    "scenariosEvaluated": 15,
+    "scenariosPending": 0,
+    "tp": 12,
+    "fp": 4,
     "fn": 0,
-    "duplicates": 0,
-    "precision": null,
-    "recall": null,
-    "totalMs": 0,
-    "meanMs": null
+    "duplicates": 7,
+    "precision": 0.75,
+    "recall": 1,
+    "totalMs": 462274,
+    "meanMs": 30818
   },
   "scenarios": [
     {
       "scenario": "pr01",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
-      "fp": 0,
+      "status": "ok",
+      "tp": 1,
+      "fp": 1,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "precision": 0.5,
+      "recall": 1,
+      "timeMs": 36324,
+      "matchedIssues": [
         "pr01-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "typescript",
+          "file": "src/reporters/fancy.ts",
+          "line": 105,
+          "column": 34,
+          "rule": "TS2345",
+          "category": "type_error",
+          "severity": "high",
+          "message": "Argument of type 'number' is not assignable to parameter of type 'Date'.",
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr01-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/reporters/fancy.ts",
+          "line": 105,
+          "rule": "cohesion",
+          "category": "cohesion",
+          "severity": "high",
+          "message": "The change replaces the log event's original timestamp (`logObj.date`) with the current time (`Date.now()`) at the moment of rendering. This shifts the responsibility of determining the log's timestamp from the core `Consola` instance (which sets `logObj.date`) to the reporter.",
+          "suggestion": "Revert to using `logObj.date`. The `formatDate` method correctly handles `logObj.date` being a `Date` object or `undefined`, ensuring logs display the time the event occurred, not when it was processed by the reporter.",
+          "replacement": "const date = this.formatDate(logObj.date, opts);",
+          "inDiff": true,
+          "verdict": "fp"
+        }
+      ]
     },
     {
       "scenario": "pr02",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
-      "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "duplicates": 1,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 37143,
+      "matchedIssues": [
         "pr02-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "typescript",
+          "file": "src/utils/tree.ts",
+          "line": 72,
+          "column": 3,
+          "rule": "TS2322",
+          "category": "type_error",
+          "severity": "high",
+          "message": "Type 'string[]' is not assignable to type 'string'.",
+          "inDiff": false,
+          "verdict": "tp",
+          "issueId": "pr02-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/utils/tree.ts",
+          "line": 67,
+          "rule": "refactoring",
+          "category": "refactoring",
+          "severity": "high",
+          "message": "The change on this line alters the type of the `tree` variable from `string` to `string[]`. While this allows for conditional joining, it introduces an inconsistency because the `formatTree` function is declared to return a `string`, and not all return paths (specifically line 72) correctly convert `tree` back to a `string` before returning. This indicates an incomplete refactoring that can lead to type errors or unexpected runtime behavior, making the code harder to maintain and debug.",
+          "suggestion": "When changing the type of a variable that is used in multiple return paths, ensure all paths are updated to handle the new type consistently with the function's declared return type. In this case, line 72 needs to be updated to `return tree.join(\"\");` to match the function's signature.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "duplicate",
+          "issueId": "pr02-1",
+          "adjudicated": true
+        }
+      ]
     },
     {
       "scenario": "pr03",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
-      "fp": 0,
+      "status": "ok",
+      "tp": 1,
+      "fp": 1,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "precision": 0.5,
+      "recall": 1,
+      "timeMs": 29400,
+      "matchedIssues": [
         "pr03-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "eslint",
+          "file": "src/utils/format.ts",
+          "line": 46,
+          "column": 7,
+          "rule": "prefer-const",
+          "category": "lint_violation",
+          "severity": "medium",
+          "message": "'compiled' is never reassigned. Use 'const' instead.",
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr03-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/utils/format.ts",
+          "line": 46,
+          "rule": "refactoring",
+          "category": "refactoring",
+          "severity": "low",
+          "message": "Introducing a temporary variable `compiled` to store the result of `compileFormat(format)` before immediately passing it to `vsprintf` adds unnecessary verbosity. The original one-liner was more concise and equally clear, as `compileFormat` is a simple function call whose result is directly consumed. This change does not improve readability, debugging, or performance.",
+          "suggestion": "Revert to the original one-liner to maintain conciseness and directness, avoiding an unnecessary temporary variable.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "fp"
+        }
+      ]
     },
     {
       "scenario": "pr04",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 24625,
+      "matchedIssues": [
         "pr04-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "eslint",
+          "file": "src/consola.ts",
+          "line": 452,
+          "column": 28,
+          "rule": "unicorn/no-array-for-each",
+          "category": "lint_violation",
+          "severity": "medium",
+          "message": "Use `for…of` instead of `.forEach(…)`.",
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr04-1"
+        }
+      ]
     },
     {
       "scenario": "pr05",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 25829,
+      "matchedIssues": [
         "pr05-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/reporters/fancy.ts",
+          "line": 147,
+          "rule": "duplication",
+          "category": "duplication",
+          "severity": "medium",
+          "message": "The `formatBoxTitle` function is an exact duplicate of the `characterFormat` function. This introduces redundant code, making the codebase harder to maintain. Any future changes or bug fixes to this formatting logic would need to be applied in two places, increasing the risk of inconsistencies and errors.",
+          "suggestion": "Remove the `formatBoxTitle` function and reuse the existing `characterFormat` function for formatting box titles. The `characterFormat` function already provides the exact same functionality.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr05-1"
+        }
+      ]
     },
     {
       "scenario": "pr06",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
-      "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "duplicates": 1,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 41748,
+      "matchedIssues": [
         "pr06-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/reporters/fancy.ts",
+          "line": 86,
+          "rule": "complexity",
+          "category": "complexity",
+          "severity": "high",
+          "message": "The `shouldUseBadge` method suffers from excessive nesting of `if-else` statements, making its logic difficult to parse and understand at a glance. This increases cognitive load for anyone trying to maintain or modify it, and makes it prone to introducing bugs.",
+          "suggestion": "Refactor the method to use a flatter structure with early returns. Group related conditions and avoid redundant checks. For instance, handle explicit boolean `logObj.badge` values first, then non-boolean `logObj.badge` values combined with `logObj.level`, and finally default logic based on `logObj.level` and `opts.columns`.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr06-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/reporters/fancy.ts",
+          "line": 102,
+          "rule": "duplication",
+          "category": "duplication",
+          "severity": "low",
+          "message": "The condition `logObj.level === 0 || logObj.level === 1 || logObj.level < 0` is entirely redundant because it is already covered by the parent condition `logObj.level < 2` on line 101. This adds unnecessary code and slightly increases complexity without providing additional logic.",
+          "suggestion": "Remove the inner `if` statement on line 102 and move its body (`return true;`) directly into the `if (logObj.level < 2)` block.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "duplicate",
+          "issueId": "pr06-1",
+          "adjudicated": true
+        }
+      ]
     },
     {
       "scenario": "pr07",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
-      "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "duplicates": 1,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 25779,
+      "matchedIssues": [
         "pr07-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/consola.ts",
+          "line": 398,
+          "rule": "naming",
+          "category": "naming",
+          "severity": "high",
+          "message": "The function name `fn` and its parameter `flag` are overly generic and non-descriptive. This significantly reduces readability and makes it harder to understand the function's purpose without analyzing its entire body, impacting maintainability.",
+          "suggestion": "Rename `fn` to `resolveLog` and `flag` to `newLog` to clearly convey their intent, aligning with the previous, more descriptive naming.",
+          "replacement": "const resolveLog = (newLog = false) => {",
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr07-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/consola.ts",
+          "line": 399,
+          "rule": "naming",
+          "category": "naming",
+          "severity": "medium",
+          "message": "The variable names `n`, `tmp`, `d`, `s`, and `x` are single-letter and non-descriptive. This makes the code harder to read, understand, and debug, as their meaning is not immediately clear from their names.",
+          "suggestion": "Use descriptive names that reflect the variable's purpose. For example, `n` could be `repeatedCount`, `tmp` could be `currentArgs`, `d` could be `diffTime`, `s` could be `serializedLog`, and `x` could be `isSameLog`.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "duplicate",
+          "issueId": "pr07-1"
+        }
+      ]
     },
     {
       "scenario": "pr08",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
-      "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "duplicates": 2,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 32567,
+      "matchedIssues": [
         "pr08-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/consola.ts",
+          "line": 423,
+          "rule": "coupling",
+          "category": "coupling",
+          "severity": "high",
+          "message": "The fallback output directly uses `process.stderr` and `process.stdout`. The `process` global is Node.js-specific and will not be available in browser environments, causing runtime errors or unexpected behavior when Consola is used in the browser with no reporters configured. Consola is designed to be cross-environment compatible.",
+          "suggestion": "Abstract the stream selection to use `console.error` and `console.log` for browser compatibility, or ensure this fallback path is only active in Node.js environments. A more robust solution would be to encapsulate this logic within a `BasicReporter` that handles environment differences.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr08-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/consola.ts",
+          "line": 417,
+          "rule": "cohesion",
+          "category": "cohesion",
+          "severity": "medium",
+          "message": "The `_log` method's primary responsibility is to dispatch log objects to registered reporters. Introducing direct rendering and formatting logic (lines 418-425) within `_log` makes the method less cohesive and blurs the separation of concerns. This rendering logic rightfully belongs within a reporter.",
+          "suggestion": "Encapsulate this fallback rendering logic into a dedicated, minimal `BasicConsoleReporter` class or function. This reporter could then be conditionally added to `this.options.reporters` if it's empty, maintaining the reporter pattern and keeping `_log` focused on dispatch.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "duplicate",
+          "issueId": "pr08-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/consola.ts",
+          "line": 417,
+          "rule": "refactoring",
+          "category": "refactoring",
+          "severity": "low",
+          "message": "The fallback output is hardcoded within the `_log` method, making it difficult for users to customize its formatting or behavior without completely replacing the `Consola` class or adding a custom reporter (which would then disable this fallback).",
+          "suggestion": "By implementing the fallback as a default `BasicConsoleReporter` (as suggested for cohesion), it could potentially be exposed as a configurable option or be easier to replace/modify for users who need a slightly different default output.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "duplicate",
+          "issueId": "pr08-1"
+        }
+      ]
     },
     {
       "scenario": "pr09",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 30141,
+      "matchedIssues": [
         "pr09-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/consola.ts",
+          "line": 454,
+          "rule": "coupling",
+          "category": "coupling",
+          "severity": "high",
+          "message": "The `Consola` class's `_log` method is becoming tightly coupled to specific reporter implementations. By adding logic to handle `FancyReporter`'s specific data expectations for 'box' titles, the core dispatcher is now aware of internal details of a particular reporter. This violates the Open/Closed Principle and separation of concerns, making the `Consola` class harder to maintain and extend when new reporters with specific data needs are introduced or existing ones change.",
+          "suggestion": "Move the data normalization logic for `logObj.title` when `logObj.type === 'box'` into the `FancyReporter`'s `log` method itself. Reporters should be responsible for processing the `LogObject` according to their own rendering needs, ensuring the core `Consola` class remains generic and decoupled.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr09-1"
+        }
+      ]
     },
     {
       "scenario": "pr10",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
-      "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "duplicates": 2,
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 36071,
+      "matchedIssues": [
         "pr10-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/utils/log.ts",
+          "line": 21,
+          "rule": "duplication",
+          "category": "duplication",
+          "severity": "medium",
+          "message": "The check `if (arg === null || arg === undefined || typeof arg !== \"object\")` is redundant. The preceding `if (!isPlainObject(arg))` on line 18 already covers these cases, as `isPlainObject` returns `false` for `null`, `undefined`, and non-object types.",
+          "suggestion": "Remove the added lines 21-23 as they do not add new validation and increase code complexity.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr10-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/utils/log.ts",
+          "line": 29,
+          "rule": "duplication",
+          "category": "duplication",
+          "severity": "medium",
+          "message": "The check `if (arg.message === undefined && arg.args === undefined)` is redundant. The preceding `if (!arg.message && !arg.args)` on line 26 already covers the case where `arg.message` and `arg.args` are `undefined` (as `undefined` is a falsy value). If the intent was to strictly check for `undefined` and not other falsy values (like `null` or `\"\"`), then the original line 26 should have been replaced, not duplicated.",
+          "suggestion": "Remove the added lines 29-31. The existing check on line 26 is sufficient for identifying missing or empty message/args.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "duplicate",
+          "issueId": "pr10-1"
+        },
+        {
+          "source": "llm",
+          "file": "src/utils/log.ts",
+          "line": 37,
+          "rule": "duplication",
+          "category": "duplication",
+          "severity": "medium",
+          "message": "The check `if (\"stack\" in arg && arg.stack)` is redundant. The preceding `if (arg.stack)` on line 34 already effectively covers this condition. If `arg.stack` is truthy, it implies the property exists, making the `\"stack\" in arg` check unnecessary for the purpose of returning `false` when a truthy `stack` property is present.",
+          "suggestion": "Remove the added lines 37-39 as they duplicate the logic of the existing check on line 34.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "duplicate",
+          "issueId": "pr10-1"
+        }
+      ]
     },
     {
       "scenario": "pr11",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 27248,
+      "matchedIssues": [
         "pr11-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/consola.ts",
+          "line": 428,
+          "rule": "duplication",
+          "category": "duplication",
+          "severity": "medium",
+          "message": "The `JSON.stringify` operation is performed twice with identical arguments (`[logObj.type, logObj.tag, logObj.args]`) within a few lines. This leads to redundant computation and makes the code less efficient and harder to maintain, as any change to the serialization logic would need to be applied in two places.",
+          "suggestion": "Calculate the serialized string once and store it in a temporary variable. Use this variable for both the comparison on line 427 and the assignment to `this._lastLog.serialized` on line 428.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr11-1"
+        }
+      ]
     },
     {
       "scenario": "pr12",
       "mode": "hybrid",
-      "status": "pending",
-      "tp": 0,
+      "status": "ok",
+      "tp": 1,
       "fp": 0,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
-      "recall": null,
-      "timeMs": null,
-      "matchedIssues": [],
-      "missedIssues": [
+      "precision": 1,
+      "recall": 1,
+      "timeMs": 25716,
+      "matchedIssues": [
         "pr12-1"
       ],
-      "findings": []
+      "missedIssues": [],
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/consola.ts",
+          "line": 457,
+          "rule": "error_handling",
+          "category": "error_handling",
+          "severity": "high",
+          "message": "The `catch` block silently ignores any errors thrown by a reporter's `log` method. This hides critical failures, making it impossible to diagnose why log messages might not be appearing as expected or if a custom reporter is buggy. This significantly impacts the maintainability and reliability of the logging system, as users will have no indication that their logs are not being processed correctly.",
+          "suggestion": "Instead of silently ignoring, the error should at least be logged to `console.error` or a dedicated internal error stream. A more robust solution would be to allow users to configure an error handler for reporter failures, or to have a fallback mechanism to report such internal errors, providing visibility into issues without crashing the application.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "tp",
+          "issueId": "pr12-1"
+        }
+      ]
     },
     {
       "scenario": "pr13",
       "mode": "hybrid",
-      "status": "pending",
+      "status": "ok",
       "tp": 0,
       "fp": 0,
       "fn": 0,
       "duplicates": 0,
       "precision": null,
       "recall": null,
-      "timeMs": null,
+      "timeMs": 24071,
       "matchedIssues": [],
       "missedIssues": [],
       "findings": []
@@ -235,32 +537,60 @@
     {
       "scenario": "pr14",
       "mode": "hybrid",
-      "status": "pending",
+      "status": "ok",
       "tp": 0,
-      "fp": 0,
+      "fp": 1,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
+      "precision": 0,
       "recall": null,
-      "timeMs": null,
+      "timeMs": 34367,
       "matchedIssues": [],
       "missedIssues": [],
-      "findings": []
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/reporters/fancy.ts",
+          "line": 78,
+          "rule": "error_handling",
+          "category": "error_handling",
+          "severity": "high",
+          "message": "The `(logObj.icon as string)` assertion is unsafe. According to the `LogObject` type, `logObj.icon` can be a function. If `logObj.icon` is a function, casting it to `string` will not convert it to a string representation of the icon, but rather keep it as a function object. This function object will then be passed to `getColor`, which expects a string, leading to incorrect rendering (e.g., `[object Function]`) or runtime errors.",
+          "suggestion": "Explicitly check the type of `logObj.icon`. If it's a function, call it with `logObj` to get the icon string. If it's a string, use it directly. This ensures the correct icon string is resolved and passed to `getColor`.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "fp"
+        }
+      ]
     },
     {
       "scenario": "pr15",
       "mode": "hybrid",
-      "status": "pending",
+      "status": "ok",
       "tp": 0,
-      "fp": 0,
+      "fp": 1,
       "fn": 0,
       "duplicates": 0,
-      "precision": null,
+      "precision": 0,
       "recall": null,
-      "timeMs": null,
+      "timeMs": 31245,
       "matchedIssues": [],
       "missedIssues": [],
-      "findings": []
+      "findings": [
+        {
+          "source": "llm",
+          "file": "src/utils/string.ts",
+          "line": 72,
+          "rule": "duplication",
+          "category": "duplication",
+          "severity": "low",
+          "message": "The `if (str.length >= len) { return str; }` check is duplicated in both `leftAlign` (added here) and `rightAlign` functions. While simple, this pattern, if its behavior were to evolve (e.g., to truncate instead of return as-is), would require changes in multiple places, increasing maintenance effort.",
+          "suggestion": "Refactor this common guard logic into a small, private helper function that can be called by all alignment utilities. This centralizes the behavior for strings that are already long enough, making future modifications more consistent and easier.",
+          "replacement": null,
+          "inDiff": true,
+          "verdict": "fp"
+        }
+      ]
     }
   ]
 }

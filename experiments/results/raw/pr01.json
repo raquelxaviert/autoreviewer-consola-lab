@@ -2,15 +2,15 @@
   "scenario": "pr01",
   "headSha": "575f679eecd2c8b9d54074ff267fe012c5e80994",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/reporters/fancy.ts"
   ],
   "diffChars": 420,
   "diffTruncated": false,
-  "staticMs": 25269,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 19215,
+  "llmMs": 17109,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
@@ -27,7 +27,20 @@
       "inDiff": true
     }
   ],
-  "llm": [],
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 105,
+      "rule": "cohesion",
+      "category": "cohesion",
+      "severity": "high",
+      "message": "The change replaces the log event's original timestamp (`logObj.date`) with the current time (`Date.now()`) at the moment of rendering. This shifts the responsibility of determining the log's timestamp from the core `Consola` instance (which sets `logObj.date`) to the reporter.",
+      "suggestion": "Revert to using `logObj.date`. The `formatDate` method correctly handles `logObj.date` being a `Date` object or `undefined`, ensuring logs display the time the event occurred, not when it was processed by the reporter.",
+      "replacement": "const date = this.formatDate(logObj.date, opts);",
+      "inDiff": true
+    }
+  ],
   "hybrid": [
     {
       "source": "typescript",
@@ -39,6 +52,24 @@
       "severity": "high",
       "message": "Argument of type 'number' is not assignable to parameter of type 'Date'.",
       "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 105,
+      "rule": "cohesion",
+      "category": "cohesion",
+      "severity": "high",
+      "message": "The change replaces the log event's original timestamp (`logObj.date`) with the current time (`Date.now()`) at the moment of rendering. This shifts the responsibility of determining the log's timestamp from the core `Consola` instance (which sets `logObj.date`) to the reporter.",
+      "suggestion": "Revert to using `logObj.date`. The `formatDate` method correctly handles `logObj.date` being a `Date` object or `undefined`, ensuring logs display the time the event occurred, not when it was processed by the reporter.",
+      "replacement": "const date = this.formatDate(logObj.date, opts);",
+      "inDiff": true
     }
-  ]
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 1268,
+    "outputTokens": 209,
+    "totalTokens": 4657
+  }
 }

@@ -2,19 +2,75 @@
   "scenario": "pr07",
   "headSha": "c9d9058ab4d48bf3e4d77846bee5588ab0f4062d",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/consola.ts"
   ],
   "diffChars": 3034,
   "diffTruncated": false,
-  "staticMs": 22047,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 18658,
+  "llmMs": 7121,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
   "static": [],
-  "llm": [],
-  "hybrid": []
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 398,
+      "rule": "naming",
+      "category": "naming",
+      "severity": "high",
+      "message": "The function name `fn` and its parameter `flag` are overly generic and non-descriptive. This significantly reduces readability and makes it harder to understand the function's purpose without analyzing its entire body, impacting maintainability.",
+      "suggestion": "Rename `fn` to `resolveLog` and `flag` to `newLog` to clearly convey their intent, aligning with the previous, more descriptive naming.",
+      "replacement": "const resolveLog = (newLog = false) => {",
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 399,
+      "rule": "naming",
+      "category": "naming",
+      "severity": "medium",
+      "message": "The variable names `n`, `tmp`, `d`, `s`, and `x` are single-letter and non-descriptive. This makes the code harder to read, understand, and debug, as their meaning is not immediately clear from their names.",
+      "suggestion": "Use descriptive names that reflect the variable's purpose. For example, `n` could be `repeatedCount`, `tmp` could be `currentArgs`, `d` could be `diffTime`, `s` could be `serializedLog`, and `x` could be `isSameLog`.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 398,
+      "rule": "naming",
+      "category": "naming",
+      "severity": "high",
+      "message": "The function name `fn` and its parameter `flag` are overly generic and non-descriptive. This significantly reduces readability and makes it harder to understand the function's purpose without analyzing its entire body, impacting maintainability.",
+      "suggestion": "Rename `fn` to `resolveLog` and `flag` to `newLog` to clearly convey their intent, aligning with the previous, more descriptive naming.",
+      "replacement": "const resolveLog = (newLog = false) => {",
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/consola.ts",
+      "line": 399,
+      "rule": "naming",
+      "category": "naming",
+      "severity": "medium",
+      "message": "The variable names `n`, `tmp`, `d`, `s`, and `x` are single-letter and non-descriptive. This makes the code harder to read, understand, and debug, as their meaning is not immediately clear from their names.",
+      "suggestion": "Use descriptive names that reflect the variable's purpose. For example, `n` could be `repeatedCount`, `tmp` could be `currentArgs`, `d` could be `diffTime`, `s` could be `serializedLog`, and `x` could be `isSameLog`.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 2681,
+    "outputTokens": 344,
+    "totalTokens": 4130
+  }
 }

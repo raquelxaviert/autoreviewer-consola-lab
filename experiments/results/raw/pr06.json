@@ -2,19 +2,75 @@
   "scenario": "pr06",
   "headSha": "d456156b76a0031f24738b95af3139f690993d8a",
   "baseSha": "e56278206e4852b5db8813835cb92c0862ebe123",
-  "mode": "static",
+  "mode": "hybrid",
   "files": [
     "src/reporters/fancy.ts"
   ],
   "diffChars": 1816,
   "diffTruncated": false,
-  "staticMs": 23296,
-  "llmMs": 0,
-  "llmAttempts": 0,
+  "staticMs": 18547,
+  "llmMs": 23201,
+  "llmAttempts": 1,
   "llmErrors": [],
   "llmRejected": [],
   "llmDuplicates": [],
   "static": [],
-  "llm": [],
-  "hybrid": []
+  "llm": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 86,
+      "rule": "complexity",
+      "category": "complexity",
+      "severity": "high",
+      "message": "The `shouldUseBadge` method suffers from excessive nesting of `if-else` statements, making its logic difficult to parse and understand at a glance. This increases cognitive load for anyone trying to maintain or modify it, and makes it prone to introducing bugs.",
+      "suggestion": "Refactor the method to use a flatter structure with early returns. Group related conditions and avoid redundant checks. For instance, handle explicit boolean `logObj.badge` values first, then non-boolean `logObj.badge` values combined with `logObj.level`, and finally default logic based on `logObj.level` and `opts.columns`.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 102,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "low",
+      "message": "The condition `logObj.level === 0 || logObj.level === 1 || logObj.level < 0` is entirely redundant because it is already covered by the parent condition `logObj.level < 2` on line 101. This adds unnecessary code and slightly increases complexity without providing additional logic.",
+      "suggestion": "Remove the inner `if` statement on line 102 and move its body (`return true;`) directly into the `if (logObj.level < 2)` block.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "hybrid": [
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 86,
+      "rule": "complexity",
+      "category": "complexity",
+      "severity": "high",
+      "message": "The `shouldUseBadge` method suffers from excessive nesting of `if-else` statements, making its logic difficult to parse and understand at a glance. This increases cognitive load for anyone trying to maintain or modify it, and makes it prone to introducing bugs.",
+      "suggestion": "Refactor the method to use a flatter structure with early returns. Group related conditions and avoid redundant checks. For instance, handle explicit boolean `logObj.badge` values first, then non-boolean `logObj.badge` values combined with `logObj.level`, and finally default logic based on `logObj.level` and `opts.columns`.",
+      "replacement": null,
+      "inDiff": true
+    },
+    {
+      "source": "llm",
+      "file": "src/reporters/fancy.ts",
+      "line": 102,
+      "rule": "duplication",
+      "category": "duplication",
+      "severity": "low",
+      "message": "The condition `logObj.level === 0 || logObj.level === 1 || logObj.level < 0` is entirely redundant because it is already covered by the parent condition `logObj.level < 2` on line 101. This adds unnecessary code and slightly increases complexity without providing additional logic.",
+      "suggestion": "Remove the inner `if` statement on line 102 and move its body (`return true;`) directly into the `if (logObj.level < 2)` block.",
+      "replacement": null,
+      "inDiff": true
+    }
+  ],
+  "model": "gemini-2.5-flash",
+  "usage": {
+    "promptTokens": 2404,
+    "outputTokens": 374,
+    "totalTokens": 7764
+  }
 }
