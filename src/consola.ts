@@ -395,19 +395,19 @@ export class Consola {
      * @param newLog false if the throttle expired and
      *  we don't want to log a duplicate
      */
-    const resolveLog = (newLog = false) => {
-      const repeated = (this._lastLog.count || 0) - this.options.throttleMin;
-      if (this._lastLog.object && repeated > 0) {
-        const args = [...this._lastLog.object.args];
-        if (repeated > 1) {
-          args.push(`(repeated ${repeated} times)`);
+    const fn = (flag = false) => {
+      const n = (this._lastLog.count || 0) - this.options.throttleMin;
+      if (this._lastLog.object && n > 0) {
+        const tmp = [...this._lastLog.object.args];
+        if (n > 1) {
+          tmp.push(`(repeated ${n} times)`);
         }
-        this._log({ ...this._lastLog.object, args });
+        this._log({ ...this._lastLog.object, args: tmp });
         this._lastLog.count = 1;
       }
 
       // Log
-      if (newLog) {
+      if (flag) {
         this._lastLog.object = logObj as LogObject;
         this._log(logObj as LogObject);
       }
@@ -415,28 +415,21 @@ export class Consola {
 
     // Throttle
     clearTimeout(this._lastLog.timeout);
-    const diffTime =
+    const d =
       this._lastLog.time && logObj.date
         ? logObj.date.getTime() - this._lastLog.time.getTime()
         : 0;
     this._lastLog.time = logObj.date;
-    if (diffTime < this.options.throttle) {
+    if (d < this.options.throttle) {
       try {
-        const serializedLog = JSON.stringify([
-          logObj.type,
-          logObj.tag,
-          logObj.args,
-        ]);
-        const isSameLog = this._lastLog.serialized === serializedLog;
-        this._lastLog.serialized = serializedLog;
-        if (isSameLog) {
+        const s = JSON.stringify([logObj.type, logObj.tag, logObj.args]);
+        const x = this._lastLog.serialized === s;
+        this._lastLog.serialized = s;
+        if (x) {
           this._lastLog.count = (this._lastLog.count || 0) + 1;
           if (this._lastLog.count > this.options.throttleMin) {
             // Auto-resolve when throttle is timed out
-            this._lastLog.timeout = setTimeout(
-              resolveLog,
-              this.options.throttle,
-            );
+            this._lastLog.timeout = setTimeout(fn, this.options.throttle);
             return; // SPAM!
           }
         }
@@ -445,7 +438,7 @@ export class Consola {
       }
     }
 
-    resolveLog(true);
+    fn(true);
   }
 
   _log(logObj: LogObject) {
