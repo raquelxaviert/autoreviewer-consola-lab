@@ -1,0 +1,32 @@
+From c38b884bd05d04e5e09a68d0984c99b1c6aedab7 Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:43 -0300
+Subject: [PATCH] refactor(core): inline throttle serialization
+
+AutoReviewer experimental scenario pr11.
+---
+ src/consola.ts | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/src/consola.ts b/src/consola.ts
+index baefd8f..a5d3b6f 100644
+--- a/src/consola.ts
++++ b/src/consola.ts
+@@ -422,13 +422,14 @@ export class Consola {
+     this._lastLog.time = logObj.date;
+     if (diffTime < this.options.throttle) {
+       try {
+-        const serializedLog = JSON.stringify([
++        const isSameLog =
++          this._lastLog.serialized ===
++          JSON.stringify([logObj.type, logObj.tag, logObj.args]);
++        this._lastLog.serialized = JSON.stringify([
+           logObj.type,
+           logObj.tag,
+           logObj.args,
+         ]);
+-        const isSameLog = this._lastLog.serialized === serializedLog;
+-        this._lastLog.serialized = serializedLog;
+         if (isSameLog) {
+           this._lastLog.count = (this._lastLog.count || 0) + 1;
+           if (this._lastLog.count > this.options.throttleMin) {

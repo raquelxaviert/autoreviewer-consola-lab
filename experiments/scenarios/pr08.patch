@@ -1,0 +1,35 @@
+From 8c02715c137e26a5af43ef4da18a5c82428c458c Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:41 -0300
+Subject: [PATCH] feat(core): print logs directly when no reporter is
+ registered
+
+AutoReviewer experimental scenario pr08.
+---
+ src/consola.ts | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/src/consola.ts b/src/consola.ts
+index baefd8f..1904519 100644
+--- a/src/consola.ts
++++ b/src/consola.ts
+@@ -413,6 +413,19 @@ export class Consola {
+       }
+     };
+ 
++    // Fallback output when no reporter is registered
++    if (this.options.reporters.length === 0) {
++      const time = (logObj.date || new Date()).toLocaleTimeString();
++      const prefix = logObj.tag ? `[${logObj.tag}] ` : "";
++      const text = (logObj.args || [])
++        .map((a) => (typeof a === "string" ? a : JSON.stringify(a)))
++        .join(" ");
++      const stream =
++        (logObj.level || 0) < 2 ? process.stderr : process.stdout;
++      stream.write(`${time} ${prefix}${logObj.type.toUpperCase()} ${text}\n`);
++      return;
++    }
++
+     // Throttle
+     clearTimeout(this._lastLog.timeout);
+     const diffTime =

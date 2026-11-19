@@ -1,0 +1,31 @@
+From bc6ffdf7158cee801ca5f71847b090f6c0080617 Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:43 -0300
+Subject: [PATCH] fix(core): keep logging when a reporter throws
+
+AutoReviewer experimental scenario pr12.
+---
+ src/consola.ts | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/src/consola.ts b/src/consola.ts
+index baefd8f..eae99ce 100644
+--- a/src/consola.ts
++++ b/src/consola.ts
+@@ -450,9 +450,13 @@ export class Consola {
+ 
+   _log(logObj: LogObject) {
+     for (const reporter of this.options.reporters) {
+-      reporter.log(logObj, {
+-        options: this.options,
+-      });
++      try {
++        reporter.log(logObj, {
++          options: this.options,
++        });
++      } catch {
++        // ignore reporter failures
++      }
+     }
+   }
+ }

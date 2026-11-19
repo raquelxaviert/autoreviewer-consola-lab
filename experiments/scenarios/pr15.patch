@@ -1,0 +1,25 @@
+From 45fe31ab19b22ad1e86ad64bb986a44154d8ef29 Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:44 -0300
+Subject: [PATCH] fix(utils): leftAlign returns long strings unchanged, as
+ documented
+
+AutoReviewer experimental scenario pr15.
+---
+ src/utils/string.ts | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/src/utils/string.ts b/src/utils/string.ts
+index 1149801..773b968 100644
+--- a/src/utils/string.ts
++++ b/src/utils/string.ts
+@@ -69,6 +69,9 @@ export function rightAlign(str: string, len: number, space = " ") {
+  * @returns {string} The left-justified string.
+  */
+ export function leftAlign(str: string, len: number, space = " ") {
++  if (str.length >= len) {
++    return str;
++  }
+   let _str = "";
+   for (let i = 0; i < len; i++) {
+     _str += i < str.length ? str[i] : space;

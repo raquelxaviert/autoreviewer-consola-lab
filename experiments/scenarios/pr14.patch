@@ -1,0 +1,39 @@
+From 845e4624f71b9d65d10494f8fa8fb612c02bde39 Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:44 -0300
+Subject: [PATCH] types(fancy): drop unnecessary any casts on typed maps
+
+AutoReviewer experimental scenario pr14.
+---
+ src/reporters/fancy.ts | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
+
+diff --git a/src/reporters/fancy.ts b/src/reporters/fancy.ts
+index 3c58b27..fa9dccb 100644
+--- a/src/reporters/fancy.ts
++++ b/src/reporters/fancy.ts
+@@ -65,9 +65,7 @@ export class FancyReporter extends BasicReporter {
+ 
+   formatType(logObj: LogObject, isBadge: boolean, opts: FormatOptions) {
+     const typeColor =
+-      (TYPE_COLOR_MAP as any)[logObj.type] ||
+-      (LEVEL_COLOR_MAP as any)[logObj.level] ||
+-      "gray";
++      TYPE_COLOR_MAP[logObj.type] || LEVEL_COLOR_MAP[logObj.level] || "gray";
+ 
+     if (isBadge) {
+       return getBgColor(typeColor)(
+@@ -75,10 +73,9 @@ export class FancyReporter extends BasicReporter {
+       );
+     }
+ 
+-    const _type =
+-      typeof (TYPE_ICONS as any)[logObj.type] === "string"
+-        ? (TYPE_ICONS as any)[logObj.type]
+-        : (logObj as any).icon || logObj.type;
++    const icon = TYPE_ICONS[logObj.type];
++    const _type: string =
++      typeof icon === "string" ? icon : (logObj.icon as string) || logObj.type;
+ 
+     return _type ? getColor(typeColor)(_type) : "";
+   }

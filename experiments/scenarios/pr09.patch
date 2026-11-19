@@ -1,0 +1,33 @@
+From 77879c6d4ff87ee3b73b93769a29f0a1f77de0a7 Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:42 -0300
+Subject: [PATCH] fix(core): normalize box titles for the fancy reporter
+
+AutoReviewer experimental scenario pr09.
+---
+ src/consola.ts | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/consola.ts b/src/consola.ts
+index baefd8f..7f43037 100644
+--- a/src/consola.ts
++++ b/src/consola.ts
+@@ -8,6 +8,7 @@ import type {
+   ConsolaOptions,
+ } from "./types";
+ import type { PromptOptions } from "./prompt";
++import { FancyReporter } from "./reporters/fancy";
+ 
+ let paused = false;
+ const queue: any[] = [];
+@@ -450,6 +451,10 @@ export class Consola {
+ 
+   _log(logObj: LogObject) {
+     for (const reporter of this.options.reporters) {
++      if (reporter instanceof FancyReporter && logObj.type === "box") {
++        // FancyReporter expects box titles to be strings
++        logObj.title = String(logObj.title ?? "");
++      }
+       reporter.log(logObj, {
+         options: this.options,
+       });

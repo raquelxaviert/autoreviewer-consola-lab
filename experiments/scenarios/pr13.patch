@@ -1,0 +1,41 @@
+From 0372541751eae5e10dbb816a8b74447bfda54572 Mon Sep 17 00:00:00 2001
+From: raquelxaviert <raquelxaviert@gmail.com>
+Date: Wed, 18 Nov 2026 21:48:43 -0300
+Subject: [PATCH] refactor(fancy): extract type color resolution into a helper
+
+AutoReviewer experimental scenario pr13.
+---
+ src/reporters/fancy.ts | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/src/reporters/fancy.ts b/src/reporters/fancy.ts
+index 3c58b27..43303b8 100644
+--- a/src/reporters/fancy.ts
++++ b/src/reporters/fancy.ts
+@@ -64,10 +64,7 @@ export class FancyReporter extends BasicReporter {
+   }
+ 
+   formatType(logObj: LogObject, isBadge: boolean, opts: FormatOptions) {
+-    const typeColor =
+-      (TYPE_COLOR_MAP as any)[logObj.type] ||
+-      (LEVEL_COLOR_MAP as any)[logObj.level] ||
+-      "gray";
++    const typeColor = getTypeColor(logObj);
+ 
+     if (isBadge) {
+       return getBgColor(typeColor)(
+@@ -134,6 +131,14 @@ export class FancyReporter extends BasicReporter {
+   }
+ }
+ 
++function getTypeColor(logObj: LogObject): string {
++  return (
++    (TYPE_COLOR_MAP as any)[logObj.type] ||
++    (LEVEL_COLOR_MAP as any)[logObj.level] ||
++    "gray"
++  );
++}
++
+ function characterFormat(str: string) {
+   return (
+     str

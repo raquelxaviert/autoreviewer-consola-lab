@@ -1,0 +1,133 @@
+{
+  "description": "Ground truth for the AutoReviewer experiment. Written from the changes deliberately introduced by scripts/create-scenarios.mjs, before any tool was run on the scenarios. Never derived from LLM output.",
+  "upstream": { "repository": "https://github.com/unjs/consola", "commit": "c47faac1738b7383971c6c20b5a34ffa15e7cc3b", "version": "3.4.2" },
+  "baseBranch": "experiment-base",
+  "baseCommit": "e56278206e4852b5db8813835cb92c0862ebe123",
+  "lineTolerance": 3,
+  "matchingRule": "A finding is a TP for an expected issue when file is equal, line is within [lines[0]-lineTolerance, lines[1]+lineTolerance] and its category is in acceptedCategories. Each expected issue is credited at most once; further matching findings count as duplicates. 'refactoring' is accepted as a generic category for maintainability scenarios; closely related categories are accepted where the problem genuinely overlaps (decided a priori, see docs/EXPERIMENT.md).",
+  "scenarios": [
+    {
+      "id": "pr01", "name": "type error", "branch": "scenario/pr01-type-error", "commit": "575f679eecd2c8b9d54074ff267fe012c5e80994",
+      "description": "FancyReporter.formatLogObj passes Date.now() (number) to formatDate, which expects a Date.",
+      "files": ["src/reporters/fancy.ts"], "hasProblem": true, "expectedTool": "typescript",
+      "issues": [
+        { "id": "pr01-1", "file": "src/reporters/fancy.ts", "lines": [105, 105], "category": "type_error", "acceptedCategories": ["type_error"], "expectedTool": "typescript",
+          "explanation": "Argument of type number is not assignable to parameter of type Date (TS2345)." }
+      ]
+    },
+    {
+      "id": "pr02", "name": "incompatible return", "branch": "scenario/pr02-incompatible-return", "commit": "8ec739a9aa1c9c1984ee9ecabfbc13d2f86ecd64",
+      "description": "formatTree (declared to return string) now returns the string[] produced by _buildTree when no color is set.",
+      "files": ["src/utils/tree.ts"], "hasProblem": true, "expectedTool": "typescript",
+      "issues": [
+        { "id": "pr02-1", "file": "src/utils/tree.ts", "lines": [67, 72], "category": "type_error", "acceptedCategories": ["type_error"], "expectedTool": "typescript",
+          "explanation": "Type string[] is not assignable to the declared return type string (TS2322 at the unchanged 'return tree;' line, caused by line 67)." }
+      ]
+    },
+    {
+      "id": "pr03", "name": "lint violation (prefer-const)", "branch": "scenario/pr03-lint-prefer-const", "commit": "7602cc6f20f87ef297e8f60c5317a3d2483ec913",
+      "description": "formatString introduces a 'let' variable that is never reassigned.",
+      "files": ["src/utils/format.ts"], "hasProblem": true, "expectedTool": "eslint",
+      "issues": [
+        { "id": "pr03-1", "file": "src/utils/format.ts", "lines": [46, 46], "category": "lint_violation", "acceptedCategories": ["lint_violation"], "expectedTool": "eslint",
+          "explanation": "prefer-const: 'compiled' is never reassigned." }
+      ]
+    },
+    {
+      "id": "pr04", "name": "lint violation (unicorn/no-array-for-each)", "branch": "scenario/pr04-lint-array-foreach", "commit": "501e8698ffc41689eea729df2c52e8035fafbcd4",
+      "description": "Consola._log replaces the for...of over reporters with Array#forEach.",
+      "files": ["src/consola.ts"], "hasProblem": true, "expectedTool": "eslint",
+      "issues": [
+        { "id": "pr04-1", "file": "src/consola.ts", "lines": [452, 456], "category": "lint_violation", "acceptedCategories": ["lint_violation"], "expectedTool": "eslint",
+          "explanation": "unicorn/no-array-for-each: use for...of instead of Array#forEach." }
+      ]
+    },
+    {
+      "id": "pr05", "name": "code duplication", "branch": "scenario/pr05-duplication", "commit": "4cbe01305ad42b2cf14fb73afd4082c9d367c6cc",
+      "description": "New formatBoxTitle helper is a verbatim copy of characterFormat and is used for box titles.",
+      "files": ["src/reporters/fancy.ts"], "hasProblem": true, "expectedTool": "llm",
+      "issues": [
+        { "id": "pr05-1", "file": "src/reporters/fancy.ts", "lines": [98, 155], "category": "duplication", "acceptedCategories": ["duplication", "refactoring"], "expectedTool": "llm",
+          "explanation": "formatBoxTitle duplicates characterFormat (same regex replacements); changes to message formatting must now be made twice." }
+      ]
+    },
+    {
+      "id": "pr06", "name": "excessive complexity", "branch": "scenario/pr06-complexity", "commit": "d456156b76a0031f24738b95af3139f690993d8a",
+      "description": "The one-line badge decision is replaced by shouldUseBadge, a deeply nested if/else chain with redundant conditions.",
+      "files": ["src/reporters/fancy.ts"], "hasProblem": true, "expectedTool": "llm",
+      "issues": [
+        { "id": "pr06-1", "file": "src/reporters/fancy.ts", "lines": [86, 113], "category": "complexity", "acceptedCategories": ["complexity", "refactoring"], "expectedTool": "llm",
+          "explanation": "Nested conditionals (4 levels) and redundant checks make a simple rule ('badge ?? level < 2') hard to read and modify." }
+      ]
+    },
+    {
+      "id": "pr07", "name": "non-descriptive names", "branch": "scenario/pr07-naming", "commit": "c9d9058ab4d48bf3e4d77846bee5588ab0f4062d",
+      "description": "Throttle logic in Consola._logFn renames resolveLog/newLog/repeated/args/diffTime/serializedLog/isSameLog to fn/flag/n/tmp/d/s/x.",
+      "files": ["src/consola.ts"], "hasProblem": true, "expectedTool": "llm",
+      "issues": [
+        { "id": "pr07-1", "file": "src/consola.ts", "lines": [398, 441], "category": "naming", "acceptedCategories": ["naming", "refactoring"], "expectedTool": "llm",
+          "explanation": "Single-letter / generic names hide the meaning of the throttling algorithm (repeat count, time delta, serialized log, same-log flag)." }
+      ]
+    },
+    {
+      "id": "pr08", "name": "low cohesion", "branch": "scenario/pr08-low-cohesion", "commit": "8c02715c137e26a5af43ef4da18a5c82428c458c",
+      "description": "Consola._logFn (log object preparation, level filtering, throttling) now also formats and writes output itself when there are no reporters.",
+      "files": ["src/consola.ts"], "hasProblem": true, "expectedTool": "llm",
+      "issues": [
+        { "id": "pr08-1", "file": "src/consola.ts", "lines": [416, 427], "category": "cohesion", "acceptedCategories": ["cohesion", "coupling", "refactoring"], "expectedTool": "llm",
+          "explanation": "Presentation logic (date/tag/type formatting, stream selection, writing) is mixed into the core log pipeline instead of living in a reporter." }
+      ]
+    },
+    {
+      "id": "pr09", "name": "high coupling", "branch": "scenario/pr09-high-coupling", "commit": "77879c6d4ff87ee3b73b93769a29f0a1f77de0a7",
+      "description": "The core Consola class imports FancyReporter and special-cases it with instanceof when dispatching box logs.",
+      "files": ["src/consola.ts"], "hasProblem": true, "expectedTool": "llm",
+      "issues": [
+        { "id": "pr09-1", "file": "src/consola.ts", "lines": [11, 457], "category": "coupling", "acceptedCategories": ["coupling", "cohesion", "refactoring"], "expectedTool": "llm",
+          "explanation": "Core logging depends on a concrete (Node-only) reporter implementation; reporter-specific normalization belongs in the reporter." }
+      ]
+    },
+    {
+      "id": "pr10", "name": "redundant logic", "branch": "scenario/pr10-redundant-logic", "commit": "1976c401771014c552dd4381522757095853118a",
+      "description": "isLogObj gets three extra checks that are already implied by the preceding ones.",
+      "files": ["src/utils/log.ts"], "hasProblem": true, "expectedTool": "llm",
+      "issues": [
+        { "id": "pr10-1", "file": "src/utils/log.ts", "lines": [21, 39], "category": "refactoring", "acceptedCategories": ["refactoring", "complexity", "duplication"], "expectedTool": "llm",
+          "explanation": "Checks for null/object type, undefined message/args and 'stack' are redundant with isPlainObject and the previous conditions; they add noise without behavior." }
+      ]
+    },
+    {
+      "id": "pr11", "name": "repeated processing", "branch": "scenario/pr11-repeated-processing", "commit": "c38b884bd05d04e5e09a68d0984c99b1c6aedab7",
+      "description": "The throttle check in Consola._logFn (called for every log) serializes the same log object with JSON.stringify twice.",
+      "files": ["src/consola.ts"], "hasProblem": true, "expectedTool": "llm",
+      "issues": [
+        { "id": "pr11-1", "file": "src/consola.ts", "lines": [425, 431], "category": "refactoring", "acceptedCategories": ["refactoring", "duplication", "complexity"], "expectedTool": "llm",
+          "explanation": "Same expensive serialization computed twice on a hot path; the value should be computed once and reused." }
+      ]
+    },
+    {
+      "id": "pr12", "name": "silent catch", "branch": "scenario/pr12-silent-catch", "commit": "bc6ffdf7158cee801ca5f71847b090f6c0080617",
+      "description": "Consola._log wraps reporter.log in try/catch with an empty handler (comment only).",
+      "files": ["src/consola.ts"], "hasProblem": true, "expectedTool": "llm",
+      "issues": [
+        { "id": "pr12-1", "file": "src/consola.ts", "lines": [453, 459], "category": "error_handling", "acceptedCategories": ["error_handling"], "expectedTool": "llm",
+          "explanation": "Reporter failures are swallowed silently: logs disappear with no signal, making failures impossible to diagnose." }
+      ]
+    },
+    {
+      "id": "pr13", "name": "correct refactoring (control)", "branch": "scenario/pr13-correct-refactor", "commit": "0372541751eae5e10dbb816a8b74447bfda54572",
+      "description": "Extracts the type color lookup of FancyReporter.formatType into a getTypeColor helper; behavior is identical.",
+      "files": ["src/reporters/fancy.ts"], "hasProblem": false, "expectedTool": null, "issues": []
+    },
+    {
+      "id": "pr14", "name": "typing improvement (control)", "branch": "scenario/pr14-typing-improvement", "commit": "845e4624f71b9d65d10494f8fa8fb612c02bde39",
+      "description": "Removes unnecessary 'as any' casts when reading the typed TYPE_COLOR_MAP / LEVEL_COLOR_MAP / TYPE_ICONS maps.",
+      "files": ["src/reporters/fancy.ts"], "hasProblem": false, "expectedTool": null, "issues": []
+    },
+    {
+      "id": "pr15", "name": "simple correct fix (control)", "branch": "scenario/pr15-simple-fix", "commit": "45fe31ab19b22ad1e86ad64bb986a44154d8ef29",
+      "description": "leftAlign returns strings that are at least as long as the width unchanged, as its JSDoc states and like rightAlign/centerAlign.",
+      "files": ["src/utils/string.ts"], "hasProblem": false, "expectedTool": null, "issues": []
+    }
+  ]
+}
