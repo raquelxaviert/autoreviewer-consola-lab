@@ -135,10 +135,9 @@ Detalhes da metodologia em [`docs/EXPERIMENT.md`](docs/EXPERIMENT.md).
 | Octokit: leitura de PR/arquivos/patches e publicação real (review inline + resumo atualizável) | ✅ executado nos 15 PRs reais (#1–#15), via CLI local com o mesmo núcleo; resultados em `experiments/results/github/` |
 | Bloco `suggestion` do GitHub | ✅ publicado e renderizado (PR #2) |
 | Reexecução sem duplicar comentários | ✅ verificado no PR #5 (`skippedExisting: 1`, resumo editado e não recriado) |
-| Workflow GitHub Actions | ⚠️ configurado e registrado, mas **nenhum job chegou a iniciar**: o GitHub recusou com *"account is locked due to a billing issue"* (bloqueio na conta, não no workflow) |
-| LLM na publicação dos PRs #8, #9, #11, #13, #14 e na reexecução do #1 | ⚠️ cota diária gratuita do Gemini esgotada (20 req/dia/modelo); o resumo desses PRs registra o erro, sem resultados inventados |
+| Workflow GitHub Actions (2 jobs, artifact, secret, publicação pelo bot `github-actions`) | ✅ executado com sucesso nos 15 PRs (2026-11-19); inicialmente bloqueado por um lock temporário de billing do GitHub, que se resolveu sozinho (conta no plano Free, sem pendências) |
+| Comentários do LLM publicados pelo Actions nos PRs #8, #9, #11, #13, #14 (antes sem LLM por cota) | ✅ publicados; demais PRs: comentários existentes reconhecidos e não duplicados |
 
-Para concluir a validação no Actions: regularizar o billing da conta GitHub e então fechar/reabrir (ou dar push em) qualquer PR.
 O workflow `autofix.ci` herdado do upstream foi desabilitado no repositório experimental (ele roda em qualquer PR).
 
 ## Limitações conhecidas
