@@ -83,6 +83,35 @@ export class FancyReporter extends BasicReporter {
     return _type ? getColor(typeColor)(_type) : "";
   }
 
+  shouldUseBadge(logObj: LogObject, opts: FormatOptions): boolean {
+    if (logObj.badge !== undefined && logObj.badge !== null) {
+      if (logObj.badge === true) {
+        return true;
+      } else {
+        if (logObj.badge === false) {
+          return false;
+        } else {
+          if (logObj.level < 2) {
+            return true;
+          }
+        }
+      }
+    } else {
+      if (logObj.level !== undefined) {
+        if (logObj.level < 2) {
+          if (logObj.level === 0 || logObj.level === 1 || logObj.level < 0) {
+            return true;
+          }
+        } else {
+          if (opts.columns !== undefined && opts.columns >= 0) {
+            return false;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
   formatLogObj(logObj: LogObject, opts: FormatOptions) {
     const [message, ...additional] = this.formatArgs(logObj.args, opts).split(
       "\n",
@@ -105,7 +134,7 @@ export class FancyReporter extends BasicReporter {
     const date = this.formatDate(logObj.date, opts);
     const coloredDate = date && colors.gray(date);
 
-    const isBadge = (logObj.badge as boolean) ?? logObj.level < 2;
+    const isBadge = this.shouldUseBadge(logObj, opts);
     const type = this.formatType(logObj, isBadge, opts);
 
     const tag = logObj.tag ? colors.gray(logObj.tag) : "";
